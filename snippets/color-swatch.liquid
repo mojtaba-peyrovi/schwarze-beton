@@ -1,0 +1,32 @@
+{%- comment -%}
+  Renders color swatches for variant color options in the product card.
+  Accepts: product (product object)
+  Usage: {% render 'color-swatch', product: product %}
+
+  Matches option names: Color / Colour / Farbe (case-insensitive).
+  Swatches are purely visual; background color is set from the value name.
+  Common CSS color names work out of the box (black, white, red, etc.).
+{%- endcomment -%}
+
+{%- assign color_option = nil -%}
+{%- for option in product.options_with_values -%}
+  {%- assign option_lc = option.name | downcase -%}
+  {%- if option_lc == 'color' or option_lc == 'colour' or option_lc == 'farbe' -%}
+    {%- assign color_option = option -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if color_option != nil and color_option.values.size > 1 -%}
+  <div class="hos-swatches" aria-label="{{ 'general.accessibility.available_colors' | t | default: 'Available colors' }}">
+    {%- for value in color_option.values -%}
+      {%- assign swatch_color = value | downcase | replace: ' ', '' -%}
+      <span
+        class="hos-swatch"
+        title="{{ value | escape }}"
+        aria-label="{{ value | escape }}"
+        style="background-color: {{ swatch_color }};"
+      ></span>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
