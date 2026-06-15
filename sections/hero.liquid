@@ -1,0 +1,206 @@
+{{ 'section-homepage.css' | asset_url | stylesheet_tag }}
+
+<section class="hos-hero" id="section-{{ section.id }}" aria-label="Hero">
+  <div class="hos-hero__inner">
+
+    {%- comment -%} LEFT: Text panel {%- endcomment -%}
+    <div class="hos-hero__copy">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+
+          {%- when 'eyebrow' -%}
+            <p class="hos-hero__eyebrow" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </p>
+
+          {%- when 'heading_1' -%}
+            <h1 class="hos-hero__h1" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </h1>
+
+          {%- when 'heading_2' -%}
+            <p class="hos-hero__h2" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </p>
+
+          {%- when 'body' -%}
+            <div class="hos-hero__body" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+
+          {%- when 'buttons' -%}
+            <div class="hos-hero__buttons" {{ block.shopify_attributes }}>
+              {%- if block.settings.button_1_label != blank -%}
+                <a href="{{ block.settings.button_1_url }}" class="hos-btn hos-btn--primary">
+                  {{ block.settings.button_1_label }}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.button_2_label != blank -%}
+                <a href="{{ block.settings.button_2_url }}" class="hos-btn hos-btn--ghost">
+                  {{ block.settings.button_2_label }}
+                </a>
+              {%- endif -%}
+            </div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} RIGHT: Image / logo panel {%- endcomment -%}
+    <div class="hos-hero__visual">
+      <div class="hos-hero__corner hos-hero__corner--tl"></div>
+      <div class="hos-hero__corner hos-hero__corner--tr"></div>
+      <div class="hos-hero__corner hos-hero__corner--bl"></div>
+      <div class="hos-hero__corner hos-hero__corner--br"></div>
+      {%- if section.settings.hero_image != blank -%}
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 900 }}"
+          alt="{{ section.settings.hero_image.alt | escape }}"
+          width="900"
+          loading="eager"
+          class="hos-hero__img"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'hos-logo-white-transparent.png' | asset_url }}"
+          alt="{{ shop.name }}"
+          width="420"
+          loading="eager"
+          class="hos-hero__logo-img"
+        >
+      {%- endif -%}
+      {%- if section.settings.product_label != blank -%}
+        <div class="hos-hero__product-label">
+          <span class="hos-hero__product-name">{{ section.settings.product_label }}</span>
+          {%- if section.settings.product_price != blank -%}
+            <span class="hos-hero__product-price">{{ section.settings.product_price }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+  <div class="hos-hero__rule" aria-hidden="true"></div>
+</section>
+
+{% schema %}
+{
+  "name": "HOS Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image (leave blank to show logo)"
+    },
+    {
+      "type": "text",
+      "id": "product_label",
+      "label": "Product label (optional)",
+      "placeholder": "Midnight Corset"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Product price (optional)",
+      "placeholder": "€129"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Eyebrow text",
+          "default": "Schwarze Szene · Berlin"
+        }
+      ]
+    },
+    {
+      "type": "heading_1",
+      "name": "Heading: Medieval",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading line 1",
+          "default": "Dress for\nthe Dark."
+        }
+      ]
+    },
+    {
+      "type": "heading_2",
+      "name": "Sub-heading (Barlow red)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading line 2",
+          "default": "Uncompromising Gothic Fashion"
+        }
+      ]
+    },
+    {
+      "type": "body",
+      "name": "Body text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body copy",
+          "default": "<p>Built from Berlin. Worn everywhere. Zero compromises.</p>"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_1_label",
+          "label": "Primary button label",
+          "default": "Jetzt Shoppen"
+        },
+        {
+          "type": "url",
+          "id": "button_1_url",
+          "label": "Primary button URL"
+        },
+        {
+          "type": "text",
+          "id": "button_2_label",
+          "label": "Ghost button label",
+          "default": "Our Story"
+        },
+        {
+          "type": "url",
+          "id": "button_2_url",
+          "label": "Ghost button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HOS Hero",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading_1" },
+        { "type": "heading_2" },
+        { "type": "body" },
+        { "type": "buttons" }
+      ]
+    }
+  ]
+}
+{% endschema %}

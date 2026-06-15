@@ -1,0 +1,94 @@
+{{ 'section-homepage.css' | asset_url | stylesheet_tag }}
+
+<section class="hos-feature-bar" id="section-{{ section.id }}" aria-label="Features">
+  <div class="hos-feature-bar__inner page-width">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' -%}
+        <div class="hos-feature-bar__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.glyph != blank -%}
+            <span class="hos-feature-bar__glyph" aria-hidden="true">{{ block.settings.glyph }}</span>
+          {%- endif -%}
+          <div class="hos-feature-bar__text">
+            <strong class="hos-feature-bar__title">{{ block.settings.title }}</strong>
+            {%- if block.settings.description != blank -%}
+              <p class="hos-feature-bar__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HOS Feature Bar",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "glyph",
+          "label": "Glyph / icon character",
+          "default": "⚔"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Orders over €80 ship free across the EU."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HOS Feature Bar",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "glyph": "⚔",
+            "title": "Free EU Shipping",
+            "description": "Orders over €80 ship free across Europe."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "glyph": "⚜",
+            "title": "Free Returns",
+            "description": "30-day returns. No questions."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "glyph": "✦",
+            "title": "Dark-Curated",
+            "description": "Every piece chosen from the Schwarze Szene."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "glyph": "◆",
+            "title": "Secure Checkout",
+            "description": "256-bit SSL. Your data stays dark."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

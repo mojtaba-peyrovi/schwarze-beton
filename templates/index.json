@@ -1,210 +1,182 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hos_hero": {
+      "type": "hero",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "eyebrow": {
+          "type": "eyebrow",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "text": "Schwarze Szene · Berlin"
           }
         },
-        "text": {
-          "type": "text",
+        "heading_1": {
+          "type": "heading_1",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "text": "Dress for\nthe Dark."
           }
         },
-        "button": {
+        "heading_2": {
+          "type": "heading_2",
+          "settings": {
+            "text": "Uncompromising Gothic Fashion"
+          }
+        },
+        "body": {
+          "type": "body",
+          "settings": {
+            "text": "<p>Built from Berlin. Worn everywhere. Zero compromises.</p>"
+          }
+        },
+        "buttons": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_1_label": "Jetzt Shoppen",
+            "button_1_url": "shopify://collections/all",
+            "button_2_label": "Our Story",
+            "button_2_url": "/pages/about"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["eyebrow", "heading_1", "heading_2", "body", "buttons"],
+      "settings": {}
+    },
+    "hos_marquee": {
+      "type": "marquee",
+      "blocks": {
+        "item_1": { "type": "item", "settings": { "text": "Schwarze Szene" } },
+        "item_2": { "type": "item", "settings": { "text": "Berlin Gothic" } },
+        "item_3": { "type": "item", "settings": { "text": "Dress for the Dark" } },
+        "item_4": { "type": "item", "settings": { "text": "Neu Kollektion" } },
+        "item_5": { "type": "item", "settings": { "text": "Handcrafted Darkness" } },
+        "item_6": { "type": "item", "settings": { "text": "Schwarze Beton" } }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "speed": 30
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "hos_feature_bar": {
+      "type": "feature-bar",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "feat_1": {
+          "type": "feature",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "glyph": "⚔",
+            "title": "Free EU Shipping",
+            "description": "Orders over €80 ship free across Europe."
           }
         },
-        "text": {
-          "type": "text",
+        "feat_2": {
+          "type": "feature",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "glyph": "⚜",
+            "title": "Free Returns",
+            "description": "30-day returns. No questions."
+          }
+        },
+        "feat_3": {
+          "type": "feature",
+          "settings": {
+            "glyph": "✦",
+            "title": "Dark-Curated",
+            "description": "Every piece chosen from the Schwarze Szene."
+          }
+        },
+        "feat_4": {
+          "type": "feature",
+          "settings": {
+            "glyph": "◆",
+            "title": "Secure Checkout",
+            "description": "256-bit SSL. Your data stays dark."
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
+      "block_order": ["feat_1", "feat_2", "feat_3", "feat_4"],
+      "settings": {}
     },
-    "featured_collection": {
+    "hos_featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
+        "eyebrow": "Neu eingetroffen",
+        "heading": "Neue Kollektion",
         "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
+        "products_to_show": 4
       }
     },
-    "collage": {
-      "type": "collage",
+    "hos_manifesto": {
+      "type": "manifesto",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "line_1": { "type": "quote_line", "settings": { "text": "Not a trend." } },
+        "line_2": { "type": "quote_line", "settings": { "text": "A conviction." } },
+        "para_1": {
+          "type": "paragraph",
           "settings": {
-            "collection": ""
+            "text": "<p>House of Steam is built for those who never belonged to the mainstream. Berlin-born, darkness-driven. Every piece we carry is chosen because it belongs to the Schwarze Szene — not because it sells.</p>"
           }
         },
-        "product": {
-          "type": "product",
+        "cta_1": {
+          "type": "cta",
           "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "label": "Unsere Geschichte",
+            "url": "/pages/about"
           }
         }
       },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "block_order": ["line_1", "line_2", "para_1", "cta_1"],
+      "settings": {}
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "hos_collection_mosaic": {
+      "type": "collection-mosaic",
       "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
+        "tile_1": { "type": "collection_tile", "settings": { "glyph": "⚔", "label": "Dresses" } },
+        "tile_2": { "type": "collection_tile", "settings": { "glyph": "⚜", "label": "Corsets" } },
+        "tile_3": { "type": "collection_tile", "settings": { "glyph": "✦", "label": "Accessories" } },
+        "tile_4": { "type": "collection_tile", "settings": { "glyph": "◆", "label": "Outerwear" } },
+        "tile_5": { "type": "collection_tile", "settings": { "glyph": "†", "label": "Footwear" } }
       },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5"],
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "eyebrow": "Kategorien",
+        "heading": "Shop the Dark"
+      }
+    },
+    "hos_brand_story": {
+      "type": "brand-story",
+      "blocks": {
+        "stat_1": { "type": "stat", "settings": { "number": "500+", "label": "Curated pieces" } },
+        "stat_2": { "type": "stat", "settings": { "number": "30+", "label": "Brands carried" } },
+        "stat_3": { "type": "stat", "settings": { "number": "EU-wide", "label": "Free shipping" } }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3"],
+      "settings": {
+        "eyebrow": "Über uns",
+        "heading": "Built from Berlin.",
+        "body": "<p>House of Steam was born in the shadow of the Berliner Mauer — where the Schwarze Szene carved its identity from cold concrete and darker impulses. We carry that legacy forward, piece by piece.</p>",
+        "cta_label": "Mehr erfahren",
+        "cta_url": "/pages/about"
+      }
+    },
+    "hos_newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Der dunkle Kreis",
+        "heading": "Join the Dark Circle.",
+        "subtext": "New drops, dark culture, no spam. Ever.",
+        "placeholder": "your@email.com",
+        "button_label": "Einschreiben",
+        "success_message": "Welcome to the dark. You are in.",
+        "legal_text": "By subscribing you agree to our privacy policy. Unsubscribe anytime."
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "hos_hero",
+    "hos_marquee",
+    "hos_feature_bar",
+    "hos_featured_collection",
+    "hos_manifesto",
+    "hos_collection_mosaic",
+    "hos_brand_story",
+    "hos_newsletter"
   ]
 }

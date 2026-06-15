@@ -1,0 +1,73 @@
+{{ 'section-homepage.css' | asset_url | stylesheet_tag }}
+{{ 'marquee.js' | asset_url | script_tag }}
+
+<section class="hos-marquee" id="section-{{ section.id }}" aria-label="Marquee ticker" aria-hidden="true">
+  <div
+    class="hos-marquee__track"
+    style="--marquee-speed: {{ section.settings.speed }}s"
+  >
+    <div class="hos-marquee__content" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' -%}
+          <span class="hos-marquee__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          <span class="hos-marquee__sep" aria-hidden="true">◆</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="hos-marquee__content hos-marquee__content--clone" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' -%}
+          <span class="hos-marquee__item">{{ block.settings.text }}</span>
+          <span class="hos-marquee__sep" aria-hidden="true">◆</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HOS Marquee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Ticker item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Schwarze Beton"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "HOS Marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Schwarze Szene" } },
+        { "type": "item", "settings": { "text": "Berlin Gothic" } },
+        { "type": "item", "settings": { "text": "Dress for the Dark" } },
+        { "type": "item", "settings": { "text": "Neu Kollektion" } },
+        { "type": "item", "settings": { "text": "Handcrafted Darkness" } },
+        { "type": "item", "settings": { "text": "Schwarze Beton" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
