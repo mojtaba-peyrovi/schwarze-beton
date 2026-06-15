@@ -1,0 +1,179 @@
+/* === HOS Mega Menu — Phase 2 === */
+
+/* Override Dawn's default mega panel colors/border */
+.hos-mega-panel.mega-menu__content {
+  background: var(--bunker, #0f0f0f);
+  border-top: 1px solid var(--ash, #262626);
+  border-bottom: 2px solid var(--schrei, #b8301f);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+}
+
+/* Inner wrapper: columns + optional promo tile side by side */
+.hos-mega-inner {
+  display: flex;
+  gap: 4rem;
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
+  align-items: flex-start;
+}
+
+/* Column list */
+.hos-mega-columns {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 3.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hos-mega-col {
+  min-width: 14rem;
+}
+
+/* Column heading = child link */
+.hos-mega-col__heading {
+  display: block;
+  font-family: var(--font-heading-family, 'Cinzel', serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--parchment, #e4ddd3);
+  text-decoration: none;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--ash, #262626);
+  margin-bottom: 1.2rem;
+  transition: color 0.15s ease;
+}
+
+.hos-mega-col__heading:hover,
+.hos-mega-col__heading:focus-visible {
+  color: var(--schrei, #b8301f);
+  outline: none;
+}
+
+.hos-mega-col__heading.mega-menu__link--active {
+  color: var(--schrei, #b8301f);
+}
+
+/* Medieval glyph prefix */
+.hos-mega-glyph {
+  margin-right: 0.5rem;
+  color: var(--schrei, #b8301f);
+  font-size: 0.85em;
+}
+
+/* Grandchild links */
+.hos-mega-col__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.hos-mega-col__link {
+  font-family: var(--font-body-family, 'Barlow', sans-serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--bone, #bdb5a8);
+  text-decoration: none;
+  display: block;
+  transition: color 0.15s ease, padding-left 0.12s ease;
+}
+
+.hos-mega-col__link:hover,
+.hos-mega-col__link:focus-visible {
+  color: var(--parchment, #e4ddd3);
+  padding-left: 0.5rem;
+  outline: none;
+}
+
+.hos-mega-col__link.mega-menu__link--active {
+  color: var(--schrei, #b8301f);
+}
+
+/* In-menu promo tile */
+.hos-mega-promo {
+  flex-shrink: 0;
+  width: 22rem;
+}
+
+.hos-mega-promo__link {
+  display: block;
+  text-decoration: none;
+}
+
+.hos-mega-promo__img-wrap {
+  overflow: hidden;
+  border: 1px solid var(--ash, #262626);
+  margin-bottom: 1.2rem;
+}
+
+.hos-mega-promo__img-wrap:hover .hos-mega-promo__img,
+.hos-mega-promo__link:focus-visible .hos-mega-promo__img {
+  transform: scale(1.04);
+}
+
+.hos-mega-promo__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+.hos-mega-promo__heading {
+  font-family: var(--font-heading-family, 'Cinzel', serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--parchment, #e4ddd3);
+  margin: 0 0 1rem;
+}
+
+.hos-mega-promo__cta {
+  display: inline-block;
+  font-family: var(--font-body-family, 'Barlow', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment, #e4ddd3);
+  background: var(--schrei, #b8301f);
+  padding: 0.8rem 1.6rem;
+  border-radius: 0;
+  transition: background 0.15s ease;
+}
+
+.hos-mega-promo__cta:hover,
+.hos-mega-promo__link:focus-visible .hos-mega-promo__cta {
+  background: var(--blood, #6e1510);
+}
+
+/* Backdrop dim behind open menu */
+.hos-mega-backdrop {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height, 0px);
+  background: rgba(8, 8, 8, 0.72);
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hos-mega-backdrop--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile: mega panel hidden — mobile uses the slide-in drawer */
+@media screen and (max-width: 989px) {
+  .hos-mega-panel {
+    display: none !important;
+  }
+}

@@ -10,6 +10,8 @@
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'mega-menu.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 
@@ -457,7 +459,7 @@
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
+  "max_blocks": 10,
   "settings": [
     {
       "type": "select",
@@ -557,6 +559,12 @@
       "label": "t:sections.header.settings.show_line_separator.label"
     },
     {
+      "type": "checkbox",
+      "id": "show_menu_glyphs",
+      "default": true,
+      "label": "Show medieval glyphs on mega menu column headings"
+    },
+    {
       "type": "header",
       "content": "t:sections.header.settings.header__1.content"
     },
@@ -639,6 +647,40 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "mega_menu_promo",
+      "name": "Mega menu promo tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "parent_menu",
+          "label": "Parent menu handle",
+          "info": "Enter the handle of the top-level nav item this promo belongs to (e.g. 'dresses', 'new-arrivals'). Must match exactly."
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "Promo image"
+        },
+        {
+          "type": "text",
+          "id": "promo_heading",
+          "label": "Promo heading",
+          "default": "Neue Kollektion"
+        },
+        {
+          "type": "text",
+          "id": "promo_cta",
+          "label": "CTA button label",
+          "default": "Jetzt ansehen"
+        },
+        {
+          "type": "url",
+          "id": "promo_link",
+          "label": "Promo link"
+        }
+      ]
     }
   ]
 }

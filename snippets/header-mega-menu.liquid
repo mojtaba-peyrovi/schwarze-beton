@@ -1,9 +1,12 @@
 {% comment %}
-  Renders a megamenu for the header.
-
-  Usage:
-  {% render 'header-mega-menu' %}
+  HOS Mega Menu — full-width dropdown panels with multi-column links + in-menu promo tiles.
+  Built on Dawn's header-menu custom element (details/summary open/close).
+  Promo tiles are configured as mega_menu_promo blocks in the header section schema.
 {% endcomment %}
+
+{%- liquid
+  assign glyphs = '⚔,✦,⚜,☩,✠' | split: ','
+-%}
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
@@ -11,62 +14,87 @@
       <li>
         {%- if link.links != blank -%}
           <header-menu>
-            <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
+            <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu hos-mega-trigger">
               <summary
                 id="HeaderMenu-{{ link.handle }}"
                 class="header__menu-item list-menu__item link focus-inset"
               >
-                <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
-                >
+                <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>
                   {{- link.title | escape -}}
                 </span>
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
+
               <div
                 id="MegaMenu-Content-{{ forloop.index }}"
-                class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
+                class="mega-menu__content hos-mega-panel color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
-                <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
-                  {%- for childlink in link.links -%}
-                    <li>
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
-                        {{ childlink.title | escape }}
-                      </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </li>
+                <div class="hos-mega-inner page-width">
+
+                  {%- comment -%} Columns: each child link is a column heading; grandchildren are the items {%- endcomment -%}
+                  <ul class="hos-mega-columns" role="list">
+                    {%- for childlink in link.links -%}
+                      {%- assign glyph = glyphs[forloop.index0 | modulo: 5] -%}
+                      <li class="hos-mega-col">
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="hos-mega-col__heading link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                          {% if childlink.current %}aria-current="page"{% endif %}
+                        >
+                          {%- if section.settings.show_menu_glyphs -%}
+                            <span class="hos-mega-glyph" aria-hidden="true">{{ glyph }}</span>
+                          {%- endif -%}
+                          {{ childlink.title | escape }}
+                        </a>
+                        {%- if childlink.links != blank -%}
+                          <ul class="hos-mega-col__links list-unstyled" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  href="{{ grandchildlink.url }}"
+                                  class="hos-mega-col__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                  {% if grandchildlink.current %}aria-current="page"{% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+                  {%- comment -%} In-menu promo tile: match blocks where parent_menu == this link's handle {%- endcomment -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'mega_menu_promo' and block.settings.parent_menu == link.handle -%}
+                      <div class="hos-mega-promo" {{ block.shopify_attributes }}>
+                        {%- if block.settings.promo_image != blank -%}
+                          <a href="{{ block.settings.promo_link | default: '#' }}" class="hos-mega-promo__link">
+                            <div class="hos-mega-promo__img-wrap">
+                              {{ block.settings.promo_image | image_url: width: 480 | image_tag:
+                                class: 'hos-mega-promo__img',
+                                widths: '240, 360, 480',
+                                sizes: '(min-width: 990px) 240px, 50vw',
+                                loading: 'lazy',
+                                alt: block.settings.promo_heading
+                              }}
+                            </div>
+                            {%- if block.settings.promo_heading != blank -%}
+                              <p class="hos-mega-promo__heading">{{ block.settings.promo_heading | escape }}</p>
+                            {%- endif -%}
+                            {%- if block.settings.promo_cta != blank -%}
+                              <span class="hos-mega-promo__cta">{{ block.settings.promo_cta | escape }}</span>
+                            {%- endif -%}
+                          </a>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
                   {%- endfor -%}
-                </ul>
+
+                </div>
               </div>
             </details>
           </header-menu>
@@ -75,15 +103,9 @@
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
             class="header__menu-item list-menu__item link link--text focus-inset"
-            {% if link.current %}
-              aria-current="page"
-            {% endif %}
+            {% if link.current %}aria-current="page"{% endif %}
           >
-            <span
-              {%- if link.current %}
-                class="header__active-menu-item"
-              {% endif %}
-            >
+            <span {%- if link.current %} class="header__active-menu-item"{% endif %}>
               {{- link.title | escape -}}
             </span>
           </a>
