@@ -35,7 +35,8 @@
                   {%- comment -%} Columns: each child link is a column heading; grandchildren are the items {%- endcomment -%}
                   <ul class="hos-mega-columns" role="list">
                     {%- for childlink in link.links -%}
-                      {%- assign glyph = glyphs[forloop.index0 | modulo: 5] -%}
+                      {%- assign glyph_index = forloop.index0 | modulo: 5 -%}
+                      {%- assign glyph = glyphs[glyph_index] -%}
                       <li class="hos-mega-col">
                         <a
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
