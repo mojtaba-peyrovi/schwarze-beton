@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'hos-header-footer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -160,7 +161,10 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              <div class="hos-logo-text">
+                <span class="hos-logo-name">{{ shop.name }}</span>
+                <span class="hos-logo-tag">Dress for the Dark</span>
+              </div>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -200,7 +204,10 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              <div class="hos-logo-text">
+                <span class="hos-logo-name">{{ shop.name }}</span>
+                <span class="hos-logo-tag">Dress for the Dark</span>
+              </div>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

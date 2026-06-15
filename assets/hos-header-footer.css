@@ -1,0 +1,271 @@
+/* ════════════════════════════════════════════
+   HOS — Header & Footer Styles
+   Schwarze Beton · Schwarze Szene
+   ════════════════════════════════════════════ */
+
+/* ── Announcement Bar ── */
+.announcement-bar__message {
+  font-family: var(--font-cinzel);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--parchment);
+}
+
+.utility-bar {
+  border-bottom: 2px solid var(--schrei) !important;
+}
+
+/* ── Header wrapper ── */
+.header-wrapper {
+  background: rgba(8, 8, 8, 0.97) !important;
+  border-bottom: 1px solid var(--ash) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.shopify-section-header-sticky .header-wrapper {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.header {
+  min-height: 64px;
+}
+
+/* ── Logo area ── */
+.header__heading-link,
+.header__heading-link:hover {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header__heading-logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Brand name + tagline text (added via Liquid) */
+.hos-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hos-logo-name {
+  font-family: var(--font-cinzel);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  color: var(--parchment);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.hos-logo-tag {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.30em;
+  color: var(--dust);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── Nav links ── */
+.list-menu__item--link {
+  font-family: var(--font-cinzel) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.20em !important;
+  color: var(--dust) !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: color 0.25s !important;
+}
+
+.list-menu__item--link:hover,
+.list-menu__item--link:focus {
+  color: var(--parchment) !important;
+}
+
+/* Dropdown items */
+.header__submenu .list-menu__item--link {
+  color: var(--iron) !important;
+}
+
+.header__submenu .list-menu__item--link:hover {
+  color: var(--parchment) !important;
+}
+
+/* ── Header icons (search, account, cart) ── */
+.header__icon {
+  color: var(--dust) !important;
+  transition: color 0.25s;
+}
+
+.header__icon:hover {
+  color: var(--parchment) !important;
+}
+
+.header__icon svg,
+.header__icon .svg-wrapper svg {
+  fill: currentColor;
+}
+
+/* Cart bubble count */
+.cart-count-bubble {
+  background: var(--schrei) !important;
+  color: var(--parchment) !important;
+  font-family: var(--font-cinzel);
+}
+
+/* ── Dropdown menus ── */
+.header__submenu {
+  background: var(--bunker) !important;
+  border: 1px solid var(--ash) !important;
+}
+
+/* ── Mobile drawer ── */
+.menu-drawer {
+  background: var(--void) !important;
+  border-right: 1px solid var(--ash) !important;
+}
+
+.menu-drawer .list-menu__item--link {
+  color: var(--iron) !important;
+  font-family: var(--font-cinzel) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+
+.menu-drawer .list-menu__item--link:hover {
+  color: var(--parchment) !important;
+}
+
+.menu-drawer__close-button {
+  color: var(--dust) !important;
+}
+
+.menu-drawer__close-button:hover {
+  color: var(--parchment) !important;
+}
+
+/* ════════════════════════════════════════════
+   Footer
+   ════════════════════════════════════════════ */
+
+.footer {
+  background: var(--bunker) !important;
+  border-top: 1px solid var(--ash) !important;
+}
+
+/* Footer block headings */
+.footer-block__heading {
+  font-family: var(--font-cinzel) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.22em !important;
+  color: var(--parchment) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 16px !important;
+}
+
+/* Footer links */
+.footer-block .list-menu__item--link {
+  font-family: var(--font-cinzel) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.18em !important;
+  color: var(--dust) !important;
+  text-transform: uppercase !important;
+  transition: color 0.2s !important;
+}
+
+.footer-block .list-menu__item--link:hover {
+  color: var(--bone) !important;
+}
+
+/* Footer bottom row */
+.footer__content-bottom {
+  border-top: 1px solid var(--ash) !important;
+  padding-top: 20px !important;
+  margin-top: 40px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.footer__copyright {
+  font-family: var(--font-display) !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em !important;
+  color: var(--iron) !important;
+}
+
+/* Berlin coordinates tag */
+.hos-berlin-tag {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--schrei);
+  text-transform: uppercase;
+}
+
+/* Footer newsletter */
+.footer__newsletter .field__input {
+  background: var(--void) !important;
+  border: 1px solid var(--ash) !important;
+  color: var(--bone) !important;
+  font-family: var(--font-body) !important;
+  border-radius: 0 !important;
+}
+
+.footer__newsletter .field__input:focus {
+  border-color: var(--schrei) !important;
+  outline: none !important;
+}
+
+.footer__newsletter .field__input::placeholder {
+  color: var(--dust) !important;
+}
+
+/* ── Localization selectors (header + footer) ── */
+.disclosure__button,
+.localization-form .disclosure__button {
+  font-family: var(--font-cinzel) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.16em !important;
+  color: var(--dust) !important;
+  text-transform: uppercase !important;
+  background: transparent !important;
+  border: 1px solid var(--ash) !important;
+}
+
+.disclosure__button:hover {
+  color: var(--parchment) !important;
+  border-color: var(--dust) !important;
+}
+
+.disclosure-has-popup .disclosure__list-wrapper {
+  background: var(--bunker) !important;
+  border: 1px solid var(--ash) !important;
+}
+
+.disclosure__item a {
+  font-family: var(--font-cinzel) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.14em !important;
+  color: var(--iron) !important;
+  text-transform: uppercase !important;
+}
+
+.disclosure__item a:hover {
+  color: var(--parchment) !important;
+}
