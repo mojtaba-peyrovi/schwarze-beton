@@ -1,0 +1,99 @@
+{%- comment -%}
+  Self-contained country / currency selector — wraps the localization form itself.
+  Renders only when more than one country/market is enabled in Shopify Admin.
+  Styled in Cinzel to match HOS brand.
+
+  Usage:
+    {% render 'country-selector', position: 'Header' %}
+
+  Accepts:
+    - position: unique string to namespace IDs (e.g. 'Header', 'Footer', 'Drawer')
+{%- endcomment -%}
+
+{%- if localization.available_countries.size > 1 -%}
+  <localization-form>
+    {%- form 'localization', id: 'CountryForm-{{ position }}', class: 'hos-country-form' -%}
+      <div class="hos-country-selector">
+        <h2 class="visually-hidden" id="CountryLabel-{{ position }}">
+          {{ 'localization.country_label' | t }}
+        </h2>
+        {%- render 'country-localization', localPosition: 'Country-{{ position }}' -%}
+      </div>
+    {%- endform -%}
+  </localization-form>
+{%- endif -%}
+
+<style>
+  .hos-country-selector .disclosure__button {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(var(--color-foreground), 0.25);
+    color: rgb(var(--color-foreground));
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+  }
+
+  .hos-country-selector .disclosure__button:hover {
+    border-color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .hos-country-selector .disclosure__button svg {
+    width: 0.6rem;
+    height: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .hos-country-selector .disclosure__list-wrapper {
+    position: absolute;
+    z-index: 200;
+    background: rgb(var(--color-background));
+    border: 1px solid rgba(var(--color-foreground), 0.2);
+    min-width: 16rem;
+    max-height: 22rem;
+    overflow-y: auto;
+  }
+
+  .hos-country-selector .disclosure__list {
+    margin: 0;
+    padding: 0.25rem 0;
+  }
+
+  .hos-country-selector .disclosure__link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    transition: color 0.15s;
+  }
+
+  .hos-country-selector .disclosure__link:hover,
+  .hos-country-selector .disclosure__link[aria-current='true'] {
+    color: rgb(var(--color-base-accent-1, 184, 48, 31));
+  }
+
+  .hos-country-selector .disclosure__link svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .hos-country-selector .localization-form__currency {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+</style>

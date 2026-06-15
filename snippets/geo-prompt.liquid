@@ -1,0 +1,85 @@
+{%- comment -%}
+  Dismissible market-awareness banner.
+  Shows the shopper's active country and currency once per session, then hides.
+  Uses sessionStorage so it reappears on new sessions but not mid-browse.
+  Renders only when multiple markets are configured.
+{%- endcomment -%}
+
+{%- if localization.available_countries.size > 1 -%}
+  <div
+    id="hos-geo-prompt"
+    class="hos-geo-prompt"
+    role="status"
+    aria-live="polite"
+    data-country="{{ localization.country.iso_code }}"
+    data-currency="{{ localization.country.currency.iso_code }}"
+    hidden
+  >
+    <span class="hos-geo-prompt__text">
+      Shopping from <strong>{{ localization.country.name }}</strong> &mdash;
+      prices shown in
+      <strong>{{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}</strong>
+    </span>
+    <button
+      type="button"
+      class="hos-geo-prompt__close"
+      aria-label="Dismiss market notice"
+    >
+      &#x2715;
+    </button>
+  </div>
+
+  <style>
+    .hos-geo-prompt {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.6rem 1.5rem;
+      background: rgb(var(--color-base-accent-2, 110, 21, 16));
+      color: rgb(var(--color-foreground));
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      position: relative;
+    }
+
+    .hos-geo-prompt__text {
+      flex: 1;
+    }
+
+    .hos-geo-prompt__close {
+      background: transparent;
+      border: none;
+      color: rgb(var(--color-foreground));
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0 0.25rem;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+
+    .hos-geo-prompt__close:hover {
+      opacity: 1;
+    }
+  </style>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'hos-geo-dismissed-' + document.getElementById('hos-geo-prompt').dataset.country;
+      var el = document.getElementById('hos-geo-prompt');
+
+      if (!sessionStorage.getItem(STORAGE_KEY)) {
+        el.removeAttribute('hidden');
+      }
+
+      el.querySelector('.hos-geo-prompt__close').addEventListener('click', function () {
+        sessionStorage.setItem(STORAGE_KEY, '1');
+        el.setAttribute('hidden', '');
+      });
+    })();
+  </script>
+{%- endif -%}
