@@ -373,6 +373,10 @@
       "min_error": "Dieser Artikel hat ein Minimum von {{ min }}",
       "max_error": "Dieser Artikel hat ein Maximum von {{ max }}",
       "step_error": "Du kannst diesen Artikel nur in Abstufungen von {{ step }} hinzufügen."
+    },
+    "collection_mosaic": {
+      "collection_fallback": "Kollektion",
+      "product_count": "{{ count }} Stücke"
     }
   },
   "localization": {

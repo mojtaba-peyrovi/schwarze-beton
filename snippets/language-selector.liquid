@@ -1,0 +1,135 @@
+{%- comment -%}
+  Self-contained language selector — wraps the localization form itself.
+  Renders only when more than one language is published in Shopify Admin.
+  Styled in Cinzel to match HOS brand.
+
+  Usage:
+    {% render 'language-selector', position: 'Header' %}
+
+  Accepts:
+    - position: unique string to namespace IDs (e.g. 'Header', 'Footer', 'Inline')
+{%- endcomment -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  <localization-form>
+    {%- form 'localization', id: 'LanguageForm-{{ position }}', class: 'hos-lang-form' -%}
+      <div class="hos-lang-selector">
+        <h2 class="visually-hidden" id="LangLabel-{{ position }}">
+          {{ 'localization.language_label' | t }}
+        </h2>
+
+        <div class="disclosure">
+          <button
+            type="button"
+            class="hos-lang-selector__btn disclosure__button"
+            aria-expanded="false"
+            aria-controls="LangList-{{ position }}"
+            aria-describedby="LangLabel-{{ position }}"
+          >
+            <span>{{ localization.language.endonym_name | capitalize }}</span>
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </button>
+
+          <div class="disclosure__list-wrapper hos-lang-selector__dropdown" hidden>
+            <ul
+              id="LangList-{{ position }}"
+              role="list"
+              class="disclosure__list list-unstyled hos-lang-selector__list"
+            >
+              {%- for language in localization.available_languages -%}
+                <li class="disclosure__item hos-lang-selector__item" tabindex="-1">
+                  <a
+                    class="hos-lang-selector__link disclosure__link focus-inset"
+                    href="#"
+                    hreflang="{{ language.iso_code }}"
+                    lang="{{ language.iso_code }}"
+                    {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+                    data-value="{{ language.iso_code }}"
+                  >
+                    {%- if language.iso_code == localization.language.iso_code -%}
+                      {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                    {%- else -%}
+                      <span class="visibility-hidden">{{- 'icon-checkmark.svg' | inline_asset_content -}}</span>
+                    {%- endif -%}
+                    <span>{{ language.endonym_name | capitalize }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+        <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+      </div>
+    {%- endform -%}
+  </localization-form>
+{%- endif -%}
+
+<style>
+  .hos-lang-selector__btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(var(--color-foreground), 0.25);
+    color: rgb(var(--color-foreground));
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: border-color 0.2s;
+  }
+
+  .hos-lang-selector__btn:hover {
+    border-color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .hos-lang-selector__btn svg {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  .hos-lang-selector__dropdown {
+    position: absolute;
+    z-index: 100;
+    background: rgb(var(--color-background));
+    border: 1px solid rgba(var(--color-foreground), 0.2);
+    min-width: 8rem;
+  }
+
+  .hos-lang-selector__list {
+    margin: 0;
+    padding: 0.25rem 0;
+  }
+
+  .hos-lang-selector__item {
+    list-style: none;
+  }
+
+  .hos-lang-selector__link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    transition: color 0.15s;
+  }
+
+  .hos-lang-selector__link:hover,
+  .hos-lang-selector__link[aria-current='true'] {
+    color: rgb(var(--color-base-accent-1, 184, 48, 31));
+  }
+
+  .hos-lang-selector__link svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    flex-shrink: 0;
+  }
+</style>

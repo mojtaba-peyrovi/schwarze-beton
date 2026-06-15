@@ -54,11 +54,11 @@
               {%- elsif col != blank -%}
                 {{ col.title }}
               {%- else -%}
-                Collection
+                {{ 'sections.collection_mosaic.collection_fallback' | t }}
               {%- endif -%}
             </span>
             {%- if col != blank and col.products_count > 0 -%}
-              <span class="hos-mosaic__count">{{ col.products_count }} Stücke</span>
+              <span class="hos-mosaic__count">{{ 'sections.collection_mosaic.product_count' | t: count: col.products_count }}</span>
             {%- endif -%}
             <span class="hos-mosaic__arrow" aria-hidden="true">→</span>
           </div>
