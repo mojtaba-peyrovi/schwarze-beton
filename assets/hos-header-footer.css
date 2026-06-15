@@ -236,6 +236,13 @@
   color: var(--dust) !important;
 }
 
+/* Hide Shopify "Follow on Shop" button — off-brand */
+.footer .shopify-section:has(follow-on-shop),
+follow-on-shop,
+.follow-on-shop {
+  display: none !important;
+}
+
 /* ── Localization selectors (header + footer) ── */
 .disclosure__button,
 .localization-form .disclosure__button {
