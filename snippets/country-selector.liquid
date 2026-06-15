@@ -61,53 +61,8 @@
     min-width: 15rem;
   }
 
-  /* Search / filter row — strip Dawn's field chrome and make it compact */
-  .hos-country-selector .country-filter {
-    padding: 0.4rem;
-    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
-  }
-
-  .hos-country-selector .field {
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    margin: 0 !important;
-  }
-
-  .hos-country-selector .field__input,
-  .hos-country-selector .country-filter__input {
-    background: rgba(var(--color-foreground), 0.06) !important;
-    border: 1px solid rgba(var(--color-foreground), 0.18) !important;
-    box-shadow: none !important;
-    color: rgb(var(--color-foreground)) !important;
-    font-family: 'Cinzel', serif !important;
-    font-size: 0.68rem !important;
-    letter-spacing: 0.08em !important;
-    /* override Dawn's floating-label padding-top */
-    padding: 0.45rem 2.2rem 0.45rem 0.65rem !important;
-    width: 100% !important;
-    outline: none !important;
-    border-radius: 0 !important;
-    height: auto !important;
-    min-height: unset !important;
-  }
-
-  .hos-country-selector .field__input::placeholder,
-  .hos-country-selector .country-filter__input::placeholder {
-    color: rgba(var(--color-foreground), 0.35) !important;
-    font-size: 0.68rem;
-  }
-
-  /* Hide floating label and redundant close button */
-  .hos-country-selector .field__label { display: none !important; }
-  .hos-country-selector .country-selector__close-button { display: none !important; }
-
-  /* Search icon */
-  .hos-country-selector .country-filter__search-icon svg {
-    width: 1.2rem;
-    height: 1.2rem;
-    color: rgba(var(--color-foreground), 0.4);
-  }
+  /* Remove search filter entirely */
+  .hos-country-selector .country-filter { display: none !important; }
 
   /* Scrollable country list — cap height here only */
   .hos-country-selector .disclosure__list {
