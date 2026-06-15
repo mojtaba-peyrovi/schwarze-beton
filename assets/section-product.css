@@ -1,0 +1,418 @@
+/* ════════════════════════════════════════════
+   SCHWARZE BETON — Product Detail Page
+   ════════════════════════════════════════════ */
+
+.hos-pdp {
+  background: var(--void);
+  padding: var(--space-lg) 0 var(--space-3xl);
+}
+
+/* ── Breadcrumb ── */
+.hos-pdp__breadcrumb {
+  font-family: var(--font-cinzel);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--iron);
+  margin: 0 0 var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+
+.hos-pdp__breadcrumb a {
+  color: var(--iron);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.hos-pdp__breadcrumb a:hover {
+  color: var(--parchment);
+}
+
+/* ── Two-column layout ── */
+.hos-pdp__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 749px) {
+  .hos-pdp__layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/* ── Gallery ── */
+.hos-pdp__gallery {
+  position: sticky;
+  top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+@media (max-width: 749px) {
+  .hos-pdp__gallery { position: static; }
+}
+
+.hos-pdp__main-img-wrap {
+  background: var(--concrete);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hos-pdp__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.15s;
+}
+
+.hos-pdp__no-img {
+  color: var(--iron);
+  font-family: var(--font-cinzel);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hos-pdp__thumbnails {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hos-pdp__thumb {
+  background: var(--concrete);
+  border: 1px solid var(--ash);
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+
+.hos-pdp__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hos-pdp__thumb:hover { border-color: var(--bone); }
+.hos-pdp__thumb--active { border-color: var(--schrei); }
+
+/* ── Info panel ── */
+.hos-pdp__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.hos-pdp__vendor {
+  font-family: var(--font-cinzel);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--schrei);
+  margin: 0;
+}
+
+.hos-pdp__title {
+  font-family: var(--font-medieval);
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  color: var(--parchment);
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* ── Price ── */
+.hos-pdp__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.hos-pdp__price-current {
+  font-family: var(--font-cinzel);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--schrei);
+  letter-spacing: 0.03em;
+}
+
+.hos-pdp__price-compare {
+  font-family: var(--font-cinzel);
+  font-size: 1rem;
+  color: var(--dust);
+  text-decoration: line-through;
+  letter-spacing: 0.03em;
+}
+
+.hos-pdp__sale-badge {
+  font-family: var(--font-cinzel);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--schrei);
+  color: var(--parchment);
+  padding: 0.2em 0.6em;
+  align-self: center;
+}
+
+/* ── Form ── */
+.hos-pdp__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Option groups ── */
+.hos-pdp__option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.hos-pdp__option-label {
+  font-family: var(--font-cinzel);
+  font-size: 0.63rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--iron);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.hos-pdp__size-guide {
+  background: none;
+  border: none;
+  font-family: var(--font-cinzel);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--schrei);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.hos-pdp__size-guide:hover { color: var(--blood); }
+
+/* ── Size / option buttons ── */
+.hos-pdp__option-buttons {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hos-pdp__option-btn {
+  background: transparent;
+  border: 1px solid var(--ash);
+  color: var(--bone);
+  font-family: var(--font-cinzel);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  min-width: 2.8rem;
+  text-align: center;
+}
+.hos-pdp__option-btn:hover {
+  border-color: var(--bone);
+  color: var(--parchment);
+}
+.hos-pdp__option-btn--selected {
+  border-color: var(--schrei);
+  color: var(--parchment);
+}
+.hos-pdp__option-btn--unavailable {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Color swatches ── */
+.hos-pdp__color-swatches {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.hos-pdp__color-swatch {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--ash);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.2s;
+}
+.hos-pdp__color-swatch:hover { border-color: var(--bone); }
+.hos-pdp__color-swatch--selected {
+  border-color: var(--schrei);
+  outline: 1px solid var(--schrei);
+  outline-offset: 1px;
+}
+
+/* ── Quantity ── */
+.hos-pdp__qty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.hos-pdp__qty-control {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--ash);
+  width: fit-content;
+}
+
+.hos-pdp__qty-btn {
+  background: var(--concrete);
+  border: none;
+  color: var(--bone);
+  font-family: var(--font-cinzel);
+  font-size: 1rem;
+  width: 2.5rem;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s;
+}
+.hos-pdp__qty-btn:hover {
+  background: var(--ash);
+  color: var(--parchment);
+}
+
+.hos-pdp__qty-input {
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--ash);
+  border-right: 1px solid var(--ash);
+  color: var(--parchment);
+  font-family: var(--font-cinzel);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  width: 3.5rem;
+  padding: 0.65rem 0;
+  -moz-appearance: textfield;
+}
+.hos-pdp__qty-input::-webkit-outer-spin-button,
+.hos-pdp__qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ── Add to Cart ── */
+.hos-pdp__ctas {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.hos-pdp__atc {
+  flex: 1;
+  padding: 1em 2em;
+  font-size: 0.78rem;
+  text-align: center;
+}
+.hos-pdp__atc[disabled] {
+  background: var(--ash);
+  border-color: var(--ash);
+  color: var(--iron);
+  cursor: not-allowed;
+}
+
+/* ── Description ── */
+.hos-pdp__desc {
+  border-top: 1px solid var(--ash);
+  padding-top: var(--space-md);
+  color: var(--bone);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+.hos-pdp__desc p:first-child { margin-top: 0; }
+.hos-pdp__desc p:last-child { margin-bottom: 0; }
+.hos-pdp__desc a { color: var(--schrei); }
+.hos-pdp__desc a:hover { color: var(--blood); }
+.hos-pdp__desc strong { color: var(--parchment); }
+
+/* ── Meta (SKU, stock) ── */
+.hos-pdp__meta {
+  border-top: 1px solid var(--ash);
+  padding-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hos-pdp__meta-item {
+  font-family: var(--font-cinzel);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--iron);
+  margin: 0;
+  display: flex;
+  gap: 0.6em;
+}
+
+.hos-pdp__meta-label {
+  color: var(--dust);
+}
+
+/* ── Related products section ── */
+.hos-related {
+  background: var(--bunker);
+  border-top: 2px solid var(--schrei);
+  padding: var(--space-2xl) 0;
+}
+
+.hos-related__header {
+  margin-bottom: var(--space-xl);
+}
+
+.hos-related__eyebrow {
+  font-family: var(--font-cinzel);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--schrei);
+  margin: 0 0 0.5rem;
+}
+
+.hos-related__heading {
+  font-family: var(--font-medieval);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--parchment);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.hos-related__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 899px) {
+  .hos-related__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 479px) {
+  .hos-related__grid { grid-template-columns: 1fr 1fr; }
+}
