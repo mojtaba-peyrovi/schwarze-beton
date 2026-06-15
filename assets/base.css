@@ -1,3 +1,86 @@
+/* ════════════════════════════════════════════
+   SCHWARZE BETON — HOS Design Tokens
+   ════════════════════════════════════════════ */
+:root {
+  /* Backgrounds */
+  --void:       #080808;
+  --bunker:     #0f0f0f;
+  --concrete:   #181818;
+  --ash:        #262626;
+
+  /* Text */
+  --dust:       #4a4a4a;
+  --iron:       #666666;
+  --bone:       #bdb5a8;
+  --parchment:  #e4ddd3;
+
+  /* Accents */
+  --schrei:     #b8301f;
+  --blood:      #6e1510;
+  --schrei-dim: rgba(184, 48, 31, 0.12);
+
+  /* Fonts */
+  --font-medieval:  'Cinzel Decorative', serif;
+  --font-cinzel:    'Cinzel', serif;
+  --font-display:   'Barlow Condensed', sans-serif;
+  --font-body:      'Barlow', sans-serif;
+
+  /* Spacing (8px base unit) */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  64px;
+  --space-2xl: 100px;
+  --space-3xl: 140px;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+button,
+input,
+select,
+textarea,
+.card,
+.product-card,
+[class*="card"] {
+  border-radius: 0 !important;
+}
+
+/* ── Base typography ── */
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--bone);
+  background-color: var(--void);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cinzel);
+  color: var(--parchment);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+}
+
+a {
+  color: var(--bone);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--parchment);
+}
+
+/* ════════════════════════════════════════════
+   Dawn base styles below
+   ════════════════════════════════════════════ */
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;

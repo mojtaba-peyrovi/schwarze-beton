@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="#080808">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -14,6 +14,12 @@
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ 'hos-logo-favicon-512.png' | asset_url }}">
+    <link rel="apple-touch-icon" href="{{ 'hos-logo-favicon-512.png' | asset_url }}">
 
     <title>
       {{ page_title }}
@@ -220,6 +226,27 @@
         --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
         --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+      }
+
+      /* ── HOS: Schwarze Beton overrides ── */
+      :root {
+        --color-background: 8, 8, 8;
+        --color-foreground: 228, 221, 211;
+        --color-base-text: 189, 181, 168;
+        --color-base-accent-1: 184, 48, 31;
+        --color-base-accent-2: 110, 21, 16;
+        --buttons-radius: 0px;
+        --buttons-radius-outset: 0px;
+        --inputs-radius: 0px;
+        --inputs-radius-outset: 0px;
+        --product-card-corner-radius: 0px;
+        --collection-card-corner-radius: 0px;
+        --blog-card-corner-radius: 0px;
+        --media-radius: 0px;
+        --text-boxes-radius: 0px;
+        --popup-corner-radius: 0px;
+        --badge-corner-radius: 0px;
+        --variant-pills-radius: 0px;
       }
 
       *,
