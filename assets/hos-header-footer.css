@@ -14,7 +14,7 @@
 }
 
 .utility-bar {
-  border-bottom: 2px solid var(--schrei) !important;
+  border-bottom: 2px solid var(--crimson) !important;
 }
 
 /* ── Header wrapper ── */
@@ -53,6 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  white-space: nowrap;
 }
 
 .hos-logo-name {
@@ -118,7 +119,7 @@
 
 /* Cart bubble count */
 .cart-count-bubble {
-  background: var(--schrei) !important;
+  background: var(--crimson) !important;
   color: var(--parchment) !important;
   font-family: var(--font-cinzel);
 }
@@ -214,7 +215,7 @@
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.16em;
-  color: var(--schrei);
+  color: var(--crimson);
   text-transform: uppercase;
 }
 
@@ -228,7 +229,7 @@
 }
 
 .footer__newsletter .field__input:focus {
-  border-color: var(--schrei) !important;
+  border-color: var(--crimson) !important;
   outline: none !important;
 }
 
@@ -241,6 +242,25 @@
 follow-on-shop,
 .follow-on-shop {
   display: none !important;
+}
+
+/* ── Header nav — prevent wrapping to second line ── */
+.header__inline-menu .list-menu--inline {
+  flex-wrap: nowrap;
+}
+
+.header__inline-menu .list-menu__item,
+.header__inline-menu .header__menu-item {
+  white-space: nowrap;
+}
+
+/* ── Country + language pickers side-by-side ── */
+.desktop-localization-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
 }
 
 /* ── Localization selectors (header + footer) ── */

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hos_hero": {
@@ -37,20 +46,66 @@
           }
         }
       },
-      "block_order": ["eyebrow", "heading_1", "heading_2", "body", "buttons"],
-      "settings": {}
+      "block_order": [
+        "eyebrow",
+        "heading_1",
+        "heading_2",
+        "body",
+        "buttons"
+      ],
+      "settings": {
+        "product_label": "",
+        "product_price": ""
+      }
     },
     "hos_marquee": {
       "type": "marquee",
       "blocks": {
-        "item_1": { "type": "item", "settings": { "text": "Schwarze Szene" } },
-        "item_2": { "type": "item", "settings": { "text": "Berlin Gothic" } },
-        "item_3": { "type": "item", "settings": { "text": "Dress for the Dark" } },
-        "item_4": { "type": "item", "settings": { "text": "Neu Kollektion" } },
-        "item_5": { "type": "item", "settings": { "text": "Handcrafted Darkness" } },
-        "item_6": { "type": "item", "settings": { "text": "Schwarze Beton" } }
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Schwarze Szene"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Berlin Gothic"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Dress for the Dark"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Neu Kollektion"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "text": "Handcrafted Darkness"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "text": "Schwarze Beton"
+          }
+        }
       },
-      "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6"],
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6"
+      ],
       "settings": {
         "speed": 30
       }
@@ -91,28 +146,13 @@
           }
         }
       },
-      "block_order": ["feat_1", "feat_2", "feat_3", "feat_4"],
+      "block_order": [
+        "feat_1",
+        "feat_2",
+        "feat_3",
+        "feat_4"
+      ],
       "settings": {}
-    },
-    "hos_tryon_teaser": {
-      "type": "tryon-teaser",
-      "settings": {
-        "eyebrow": "Virtual Experience",
-        "heading": "Digital Fitting Room",
-        "body": "See how each piece looks on you before it becomes yours.",
-        "cta_label": "Try On Now",
-        "cta_url": "#"
-      }
-    },
-    "hos_before_after": {
-      "type": "before-after",
-      "settings": {
-        "eyebrow": "Before & After",
-        "heading": "",
-        "before_label": "Before",
-        "after_label": "After",
-        "initial_position": 50
-      }
     },
     "hos_featured_collection": {
       "type": "featured-collection",
@@ -126,8 +166,18 @@
     "hos_manifesto": {
       "type": "manifesto",
       "blocks": {
-        "line_1": { "type": "quote_line", "settings": { "text": "Not a trend." } },
-        "line_2": { "type": "quote_line", "settings": { "text": "A conviction." } },
+        "line_1": {
+          "type": "quote_line",
+          "settings": {
+            "text": "Not a trend."
+          }
+        },
+        "line_2": {
+          "type": "quote_line",
+          "settings": {
+            "text": "A conviction."
+          }
+        },
         "para_1": {
           "type": "paragraph",
           "settings": {
@@ -142,32 +192,122 @@
           }
         }
       },
-      "block_order": ["line_1", "line_2", "para_1", "cta_1"],
+      "block_order": [
+        "line_1",
+        "line_2",
+        "para_1",
+        "cta_1"
+      ],
       "settings": {}
     },
     "hos_collection_mosaic": {
       "type": "collection-mosaic",
       "blocks": {
-        "tile_1": { "type": "collection_tile", "settings": { "glyph": "⚔", "label": "Dresses" } },
-        "tile_2": { "type": "collection_tile", "settings": { "glyph": "⚜", "label": "Corsets" } },
-        "tile_3": { "type": "collection_tile", "settings": { "glyph": "✦", "label": "Accessories" } },
-        "tile_4": { "type": "collection_tile", "settings": { "glyph": "◆", "label": "Outerwear" } },
-        "tile_5": { "type": "collection_tile", "settings": { "glyph": "†", "label": "Footwear" } }
+        "tile_1": {
+          "type": "collection_tile",
+          "settings": {
+            "collection": "",
+            "label": "Dresses",
+            "glyph": "⚔"
+          }
+        },
+        "tile_2": {
+          "type": "collection_tile",
+          "settings": {
+            "collection": "",
+            "label": "Corsets",
+            "glyph": "⚜"
+          }
+        },
+        "tile_3": {
+          "type": "collection_tile",
+          "settings": {
+            "collection": "",
+            "label": "Accessories",
+            "glyph": "✦"
+          }
+        },
+        "tile_4": {
+          "type": "collection_tile",
+          "settings": {
+            "collection": "",
+            "label": "Outerwear",
+            "glyph": "◆"
+          }
+        },
+        "tile_5": {
+          "type": "collection_tile",
+          "settings": {
+            "collection": "",
+            "label": "Footwear",
+            "glyph": "†"
+          }
+        }
       },
-      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4", "tile_5"],
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5"
+      ],
       "settings": {
         "eyebrow": "Kategorien",
         "heading": "Shop the Dark"
       }
     },
+    "hos_tryon_teaser": {
+      "type": "tryon-teaser",
+      "settings": {
+        "eyebrow": "Virtual Experience",
+        "heading": "Digital Fitting Room",
+        "body": "See how each piece looks on you before it becomes yours.",
+        "cta_label": "Try On Now",
+        "cta_url": "#"
+      }
+    },
+    "hos_before_after": {
+      "type": "before-after",
+      "settings": {
+        "eyebrow": "SLIDE",
+        "heading": "",
+        "before_image": "shopify://shop_images/gemini-2.5-flash-image_generate_a_1600_x_900_px_size_image_showing_a_cool_modern_girl_in_her_jeans_and-0.jpg",
+        "after_image": "shopify://shop_images/gemini-2.5-flash-image_generate_a_1600_x_900_px_size_image_of_the_exact_same_person_same_location_same-0.jpg",
+        "before_label": "Before",
+        "after_label": "After",
+        "initial_position": 50
+      }
+    },
     "hos_brand_story": {
       "type": "brand-story",
       "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "500+", "label": "Curated pieces" } },
-        "stat_2": { "type": "stat", "settings": { "number": "30+", "label": "Brands carried" } },
-        "stat_3": { "type": "stat", "settings": { "number": "EU-wide", "label": "Free shipping" } }
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "500+",
+            "label": "Curated pieces"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "30+",
+            "label": "Brands carried"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "EU-wide",
+            "label": "Free shipping"
+          }
+        }
       },
-      "block_order": ["stat_1", "stat_2", "stat_3"],
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
       "settings": {
         "eyebrow": "Über uns",
         "heading": "Built from Berlin.",
@@ -193,11 +333,11 @@
     "hos_hero",
     "hos_marquee",
     "hos_feature_bar",
-    "hos_tryon_teaser",
-    "hos_before_after",
     "hos_featured_collection",
     "hos_manifesto",
     "hos_collection_mosaic",
+    "hos_tryon_teaser",
+    "hos_before_after",
     "hos_brand_story",
     "hos_newsletter"
   ]

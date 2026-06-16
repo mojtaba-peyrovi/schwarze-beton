@@ -4,7 +4,7 @@
 .hos-mega-panel.mega-menu__content {
   background: var(--bunker, #0f0f0f);
   border-top: 1px solid var(--ash, #262626);
-  border-bottom: 2px solid var(--schrei, #b8301f);
+  border-bottom: 2px solid var(--crimson, #b8301f);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
 }
 
@@ -50,18 +50,18 @@
 
 .hos-mega-col__heading:hover,
 .hos-mega-col__heading:focus-visible {
-  color: var(--schrei, #b8301f);
+  color: var(--crimson, #b8301f);
   outline: none;
 }
 
 .hos-mega-col__heading.mega-menu__link--active {
-  color: var(--schrei, #b8301f);
+  color: var(--crimson, #b8301f);
 }
 
 /* Medieval glyph prefix */
 .hos-mega-glyph {
   margin-right: 0.5rem;
-  color: var(--schrei, #b8301f);
+  color: var(--crimson, #b8301f);
   font-size: 0.85em;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .hos-mega-col__link.mega-menu__link--active {
-  color: var(--schrei, #b8301f);
+  color: var(--crimson, #b8301f);
 }
 
 /* In-menu promo tile */
@@ -143,7 +143,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--parchment, #e4ddd3);
-  background: var(--schrei, #b8301f);
+  background: var(--crimson, #b8301f);
   padding: 0.8rem 1.6rem;
   border-radius: 0;
   transition: background 0.15s ease;

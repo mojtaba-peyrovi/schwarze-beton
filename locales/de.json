@@ -217,6 +217,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Seite nicht gefunden",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Keine Ergebnisse gefunden für \"{{ terms }}\". Überprüfe die Schreibweise oder versuche es mit einer anderen Suchanfrage.",
       "results_with_count": {
@@ -260,10 +264,6 @@
         "error_heading": "Bitte passe Folgendes an:",
         "title": "Kontaktformular"
       }
-    },
-    "404": {
-      "title": "Seite nicht gefunden",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -305,7 +305,10 @@
       "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "Inkl. Zollgebühren. Steuern, Rabatte und <a href=\"{{ link }}\">Versand</a> werden beim Checkout berechnet.",
       "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "Inkl. Zollgebühren. Steuern, Rabatte und Versand werden beim Checkout berechnet.",
       "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Steuern, Rabatte und <a href=\"{{ link }}\">Versand</a> werden beim Checkout berechnet.",
-      "taxes_at_checkout_shipping_at_checkout_without_policy": "Steuern, Rabatte und Versand werden beim Checkout berechnet."
+      "taxes_at_checkout_shipping_at_checkout_without_policy": "Steuern, Rabatte und Versand werden beim Checkout berechnet.",
+      "free_shipping_progress": "Noch {{ amount }} bis zum kostenlosen Versand",
+      "free_shipping_unlocked": "Kostenloser Versand freigeschaltet!",
+      "cross_sell_heading": "Das könnte dir gefallen"
     },
     "footer": {
       "payment": "Zahlungsmethoden"

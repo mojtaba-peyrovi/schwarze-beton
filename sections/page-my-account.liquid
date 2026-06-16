@@ -1,12 +1,16 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 {{ 'hos-profile.css' | asset_url | stylesheet_tag }}
 
+{%- if customer == blank -%}
+  <script>window.location = {{ routes.account_login_url | json }};</script>
+  <noscript><meta http-equiv="refresh" content="0;url={{ routes.account_login_url }}"></noscript>
+{%- else -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
-
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -16,25 +20,23 @@
 {%- endstyle -%}
 
 {%- assign proxy_url = section.settings.proxy_url -%}
-{%- assign avatar    = customer.metafields.hos.avatar -%}
-{%- assign username  = customer.metafields.hos.username -%}
-{%- assign sizes     = customer.metafields.hos.sizes -%}
-{%- assign location  = customer.metafields.hos.location -%}
+{%- assign avatar   = customer.metafields.hos.avatar -%}
+{%- assign username = customer.metafields.hos.username -%}
+{%- assign sizes    = customer.metafields.hos.sizes -%}
+{%- assign location = customer.metafields.hos.location -%}
 
 <div class="customer account section-{{ section.id }}-padding">
 
-  <!-- ── Account header ── -->
+  <!-- ── Header ── -->
   <div class="account__header">
-    <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
+    <h1 class="customer__title">My Account</h1>
     <a href="{{ routes.account_logout_url }}" class="account__logout">
-      <span class="svg-wrapper">
-        {{- 'icon-account.svg' | inline_asset_content -}}
-      </span>
-      {{ 'customer.log_out' | t }}
+      <span class="svg-wrapper">{{- 'icon-account.svg' | inline_asset_content -}}</span>
+      Sign out
     </a>
   </div>
 
-  <!-- ── Professional Profile Card ── -->
+  <!-- ── Profile Card ── -->
   <div class="hos-profile-card">
     <div class="hos-profile-card__avatar-wrap">
       {%- if avatar != blank -%}
@@ -42,29 +44,21 @@
           src="{{ avatar | image_url: width: 240, height: 240, crop: 'center' }}"
           alt="{{ username | default: customer.first_name }}"
           class="hos-profile-card__avatar"
-          width="120"
-          height="120"
-          loading="lazy"
+          width="120" height="120" loading="lazy"
         >
       {%- else -%}
         <img
           src="{{ 'hos-logo-favicon-512.png' | asset_url }}"
           alt="HOS"
           class="hos-profile-card__avatar hos-profile-card__avatar--fallback"
-          width="120"
-          height="120"
-          loading="lazy"
+          width="120" height="120" loading="lazy"
         >
       {%- endif -%}
     </div>
 
     <div class="hos-profile-card__info">
       <p class="hos-profile-card__username">
-        {%- if username != blank -%}
-          {{ username }}
-        {%- else -%}
-          {{ customer.first_name }} {{ customer.last_name }}
-        {%- endif -%}
+        {%- if username != blank -%}{{ username }}{%- else -%}{{ customer.first_name }} {{ customer.last_name }}{%- endif -%}
       </p>
 
       {%- if location != blank -%}
@@ -73,25 +67,14 @@
 
       {%- if sizes != blank -%}
         <div class="hos-profile-card__sizes">
-          {%- if sizes.top != blank -%}
-            <span class="hos-profile-size-badge">Top <strong>{{ sizes.top }}</strong></span>
-          {%- endif -%}
-          {%- if sizes.bottom != blank -%}
-            <span class="hos-profile-size-badge">Bottom <strong>{{ sizes.bottom }}</strong></span>
-          {%- endif -%}
-          {%- if sizes.shoe != blank -%}
-            <span class="hos-profile-size-badge">Shoe <strong>{{ sizes.shoe }}</strong></span>
-          {%- endif -%}
+          {%- if sizes.top    != blank -%}<span class="hos-profile-size-badge">Top <strong>{{ sizes.top }}</strong></span>{%- endif -%}
+          {%- if sizes.bottom != blank -%}<span class="hos-profile-size-badge">Bottom <strong>{{ sizes.bottom }}</strong></span>{%- endif -%}
+          {%- if sizes.shoe   != blank -%}<span class="hos-profile-size-badge">Shoe <strong>{{ sizes.shoe }}</strong></span>{%- endif -%}
         </div>
       {%- endif -%}
 
       {%- if proxy_url != blank -%}
-        <button
-          class="hos-profile-card__edit-btn"
-          type="button"
-          aria-expanded="false"
-          aria-controls="hos-profile-edit"
-        >
+        <button class="hos-profile-card__edit-btn" type="button" aria-expanded="false" aria-controls="hos-profile-edit">
           Edit Profile
         </button>
       {%- else -%}
@@ -100,63 +83,32 @@
     </div>
   </div>
 
-  <!-- ── Inline edit form (shown when proxy URL is configured) ── -->
+  <!-- ── Edit form ── -->
   {%- if proxy_url != blank -%}
     <div id="hos-profile-edit" class="hos-profile-edit" hidden>
       <h2>Edit Profile</h2>
-      <form class="hos-profile-edit__form" id="hos-profile-form" novalidate>
+      <form id="hos-profile-form" class="hos-profile-edit__form" novalidate>
         <div class="field">
-          <input
-            type="text"
-            id="ProfileUsername"
-            name="username"
-            value="{{ username }}"
-            placeholder="Display name / handle"
-            autocomplete="nickname"
-          >
+          <input type="text" id="ProfileUsername" name="username" value="{{ username }}" placeholder="Display name / handle" autocomplete="nickname">
           <label for="ProfileUsername">Username</label>
         </div>
         <div class="field">
-          <input
-            type="text"
-            id="ProfileLocation"
-            name="location"
-            value="{{ location }}"
-            placeholder="City / region"
-          >
+          <input type="text" id="ProfileLocation" name="location" value="{{ location }}" placeholder="City / region">
           <label for="ProfileLocation">Location</label>
         </div>
         <fieldset class="hos-profile-edit__sizes-fieldset">
           <legend>Size Profile</legend>
           <div class="hos-profile-edit__sizes-grid">
             <div class="field">
-              <input
-                type="text"
-                id="ProfileSizeTop"
-                name="sizes[top]"
-                value="{{ sizes.top }}"
-                placeholder="e.g. M"
-              >
+              <input type="text" id="ProfileSizeTop"    name="sizes[top]"    value="{{ sizes.top }}"    placeholder="e.g. M">
               <label for="ProfileSizeTop">Top</label>
             </div>
             <div class="field">
-              <input
-                type="text"
-                id="ProfileSizeBottom"
-                name="sizes[bottom]"
-                value="{{ sizes.bottom }}"
-                placeholder="e.g. 32"
-              >
+              <input type="text" id="ProfileSizeBottom" name="sizes[bottom]" value="{{ sizes.bottom }}" placeholder="e.g. 32">
               <label for="ProfileSizeBottom">Bottom</label>
             </div>
             <div class="field">
-              <input
-                type="text"
-                id="ProfileSizeShoe"
-                name="sizes[shoe]"
-                value="{{ sizes.shoe }}"
-                placeholder="e.g. 10"
-              >
+              <input type="text" id="ProfileSizeShoe"   name="sizes[shoe]"   value="{{ sizes.shoe }}"   placeholder="e.g. 10">
               <label for="ProfileSizeShoe">Shoe</label>
             </div>
           </div>
@@ -183,10 +135,7 @@
           if (panel) panel.hidden = !open;
         }
 
-        if (btn) btn.addEventListener('click', function () {
-          setOpen(btn.getAttribute('aria-expanded') !== 'true');
-        });
-
+        if (btn)    btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
         if (cancel) cancel.addEventListener('click', function () { setOpen(false); });
 
         if (form) {
@@ -200,7 +149,6 @@
               delete raw[key];
             });
             raw.sizes = sizes;
-
             fetch(proxyUrl, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -208,12 +156,8 @@
             })
             .then(function (r) {
               status.hidden = false;
-              if (r.ok) {
-                status.textContent = 'Profile saved.';
-                setTimeout(function () { window.location.reload(); }, 800);
-              } else {
-                status.textContent = 'Save failed — please try again.';
-              }
+              status.textContent = r.ok ? 'Profile saved.' : 'Save failed — please try again.';
+              if (r.ok) setTimeout(function () { location.reload(); }, 800);
             })
             .catch(function () {
               status.hidden = false;
@@ -225,7 +169,7 @@
     </script>
   {%- endif -%}
 
-  <!-- ── Orders + address details ── -->
+  <!-- ── Orders + details ── -->
   <div class="account__body">
     <div class="account__orders">
       <h2>{{ 'customer.orders.title' | t }}</h2>
@@ -236,33 +180,23 @@
             <caption class="visually-hidden">{{ 'customer.orders.title' | t }}</caption>
             <thead role="rowgroup">
               <tr role="row">
-                <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
-                <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
-                <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+                <th id="ColumnOrder"       scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+                <th id="ColumnDate"        scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+                <th id="ColumnPayment"     scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
                 <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
-                <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+                <th id="ColumnTotal"       scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
               </tr>
             </thead>
             <tbody role="rowgroup">
               {%- for order in customer.orders -%}
                 <tr role="row">
                   <td id="RowOrder" role="cell" headers="ColumnOrder" data-label="{{ 'customer.orders.order_number' | t }}">
-                    <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
-                      {{ order.name }}
-                    </a>
+                    <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">{{ order.name }}</a>
                   </td>
-                  <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
-                    {{ order.created_at | time_tag: format: 'date' }}
-                  </td>
-                  <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
-                    {{ order.financial_status_label }}
-                  </td>
-                  <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
-                    {{ order.fulfillment_status_label }}
-                  </td>
-                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
-                    {{ order.total_net_amount | money_with_currency }}
-                  </td>
+                  <td headers="RowOrder ColumnDate"        role="cell" data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</td>
+                  <td headers="RowOrder ColumnPayment"     role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                  <td headers="RowOrder ColumnTotal"       role="cell" data-label="{{ 'customer.orders.total' | t }}">{{ order.total_net_amount | money_with_currency }}</td>
                 </tr>
               {%- endfor -%}
             </tbody>
@@ -275,29 +209,21 @@
           <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
             <ul role="list">
               {%- if paginate.previous -%}
-                <li>
-                  <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
-                    <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-                  </a>
-                </li>
+                <li><a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}"><span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span></a></li>
               {%- endif -%}
               {%- for part in paginate.parts -%}
                 <li>
                   {%- if part.is_link -%}
                     <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{- part.title -}}</a>
                   {%- elsif part.title == paginate.current_page -%}
-                    <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{- part.title -}}</span>
+                    <span aria-current="page">{{- part.title -}}</span>
                   {%- else -%}
                     <span>{{ part.title }}</span>
                   {%- endif -%}
                 </li>
               {%- endfor -%}
               {%- if paginate.next -%}
-                <li>
-                  <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
-                    <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-                  </a>
-                </li>
+                <li><a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}"><span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span></a></li>
               {%- endif -%}
             </ul>
           </nav>
@@ -308,27 +234,27 @@
     <div class="account__details">
       <h2>{{ 'customer.account.details' | t }}</h2>
       {{ customer.default_address | format_address }}
-      <a href="{{ routes.account_addresses_url }}">
-        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
-      </a>
+      <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
     </div>
   </div>
 
 </div>
 
+{%- endif -%}
+
 {% schema %}
 {
-  "name": "t:sections.main-account.name",
+  "name": "My Account",
   "settings": [
     {
       "type": "text",
       "id": "proxy_url",
       "label": "Profile proxy URL",
-      "info": "App proxy endpoint for profile saves (e.g. /apps/profile). Leave blank to hide edit forms and show a 'coming soon' message. Expected POST payload: { username, location, sizes: { top, bottom, shoe } }"
+      "info": "App proxy endpoint for profile saves (e.g. /apps/profile). Leave blank to hide edit forms. Expected POST payload: { username, location, sizes: { top, bottom, shoe } }"
     },
     {
       "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "Padding"
     },
     {
       "type": "range",
@@ -337,7 +263,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
+      "label": "Top padding",
       "default": 36
     },
     {
@@ -347,7 +273,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
+      "label": "Bottom padding",
       "default": 36
     }
   ]

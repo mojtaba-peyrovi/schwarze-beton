@@ -217,6 +217,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "No results found for “{{ terms }}”. Check the spelling or use a different word or phrase.",
       "page": "Page",
@@ -260,10 +264,6 @@
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
         "error_heading": "Please adjust the following:"
       }
-    },
-    "404": {
-      "title": "Page not found",
-      "subtext": "404"
     }
   },
   "sections": {
@@ -312,7 +312,10 @@
       "login": {
         "title": "Have an account?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
-      }
+      },
+      "free_shipping_progress": "Only {{ amount }} away from free shipping",
+      "free_shipping_unlocked": "Free shipping unlocked!",
+      "cross_sell_heading": "You might also like"
     },
     "footer": {
       "payment": "Payment methods"
