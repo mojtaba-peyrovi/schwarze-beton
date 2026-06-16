@@ -296,6 +296,27 @@
     var availEl = document.getElementById('PDPAvailability');
     if (availEl) availEl.textContent = match.available ? 'In stock' : 'Sold out';
 
+    // Featured image
+    if (match.featured_image && mainImg) {
+      var src = match.featured_image.src;
+      // Shopify CDN URLs contain sizing params — strip them so we can request a clean width
+      src = src.replace(/(_\d+x\d*|_\d*x\d+)(\.(?:jpg|jpeg|png|webp|gif))/i, '$2');
+      mainImg.src = src + (src.indexOf('?') === -1 ? '?' : '&') + 'width=1200';
+      mainImg.alt = match.featured_image.alt || mainImg.alt;
+
+      // Sync the thumbnail strip: remove active from all, activate the matching thumb
+      var thumbs = document.querySelectorAll('.hos-pdp__thumb');
+      thumbs.forEach(function (t) { t.classList.remove('hos-pdp__thumb--active'); });
+      thumbs.forEach(function (t) {
+        // Compare the thumb's data-img-url against both the raw src and the sized src
+        var thumbSrc = (t.dataset.imgUrl || '').replace(/(_\d+x\d*|_\d*x\d+)(\.(?:jpg|jpeg|png|webp|gif))/i, '$2');
+        var matchSrc = match.featured_image.src.replace(/(_\d+x\d*|_\d*x\d+)(\.(?:jpg|jpeg|png|webp|gif))/i, '$2');
+        if (thumbSrc.split('?')[0] === matchSrc.split('?')[0]) {
+          t.classList.add('hos-pdp__thumb--active');
+        }
+      });
+    }
+
     // Update URL without reload
     if (history.replaceState) {
       var url = new URL(window.location.href);
