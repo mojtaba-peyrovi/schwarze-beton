@@ -50,6 +50,23 @@
   transition: none;
 }
 
+/* ── Overlaid eyebrow (centred at top of slider) ── */
+.bac__eyebrow {
+  position: absolute;
+  top: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-cinzel);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  white-space: nowrap;
+  z-index: 3;
+  pointer-events: none;
+  margin: 0;
+}
+
 /* ── Labels ── */
 .bac__label {
   position: absolute;

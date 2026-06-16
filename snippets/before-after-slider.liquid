@@ -15,6 +15,10 @@
 
 <div class="bac" data-bac>
 
+  {%- if bac_eyebrow != blank -%}
+    <p class="bac__eyebrow" aria-hidden="true">{{ bac_eyebrow }}</p>
+  {%- endif -%}
+
   {%- comment -%} ── Before (background) ── {%- endcomment -%}
   <div class="bac__before">
     {%- if bac_before_img != blank -%}

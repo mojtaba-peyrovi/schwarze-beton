@@ -5,6 +5,7 @@
 {%- assign bac_before_label = section.settings.before_label | default: 'Vorher' -%}
 {%- assign bac_after_label  = section.settings.after_label  | default: 'Nachher' -%}
 {%- assign bac_initial      = section.settings.initial_position | default: 50 -%}
+{%- assign bac_eyebrow      = section.settings.eyebrow -%}
 
 {%- if bac_before_img == blank and bac_after_img == blank and request.design_mode == false -%}
   {%- comment -%} Nothing to render outside the editor {%- endcomment -%}
@@ -12,14 +13,9 @@
 
 <section class="hos-bac-section">
 
-  {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+  {%- if section.settings.heading != blank -%}
     <div class="page-width hos-bac-section__header">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="hos-section-eyebrow">{{ section.settings.eyebrow }}</p>
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="hos-section-heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
+      <h2 class="hos-section-heading">{{ section.settings.heading }}</h2>
     </div>
   {%- endif -%}
 
@@ -29,7 +25,8 @@
       bac_after_img:    bac_after_img,
       bac_before_label: bac_before_label,
       bac_after_label:  bac_after_label,
-      bac_initial:      bac_initial
+      bac_initial:      bac_initial,
+      bac_eyebrow:      bac_eyebrow
     %}
   </div>
 
