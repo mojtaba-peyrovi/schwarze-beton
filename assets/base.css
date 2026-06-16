@@ -18,6 +18,7 @@
   --crimson:     #b8301f;
   --blood:       #6e1510;
   --crimson-dim: rgba(184, 48, 31, 0.12);
+  --schrei:      #b8301f; /* brand focus-ring colour */
 
   /* Fonts */
   --font-medieval:  'Pirata One', 'Cinzel Decorative', serif;
@@ -94,7 +95,7 @@ a:hover {
   --alpha-button-border: 1;
   --alpha-link: 0.85;
   --alpha-badge-border: 0.1;
-  --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  --focused-base-outline: 2px solid var(--schrei);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
@@ -3370,7 +3371,7 @@ details-disclosure > details {
   }
 
   .scroll-trigger.animate--slide-in {
-    transform: translateY(2rem);
+    transform: translateY(24px);
   }
 
   .scroll-trigger:not(.scroll-trigger--offscreen).animate--fade-in {
@@ -3399,7 +3400,7 @@ details-disclosure > details {
 
   @keyframes slideIn {
     from {
-      transform: translateY(2rem);
+      transform: translateY(24px);
       opacity: 0.01;
     }
     to {
