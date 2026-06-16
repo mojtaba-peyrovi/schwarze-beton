@@ -44,7 +44,7 @@
 }
 
 .header__heading-logo {
-  height: 40px;
+  height: 60px;
   width: auto;
 }
 
@@ -259,9 +259,10 @@ follow-on-shop,
   align-items: center;
 }
 
-/* Force localization selects to same height as icon buttons */
-.js .header-localization:not(.menu-drawer__localization) .localization-form__select {
-  height: 4.4rem !important;
+/* Strip padding that breaks vertical alignment when both country + language forms are present */
+.desktop-localization-wrapper .localization-form {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* ── Country + language pickers side-by-side ── */
