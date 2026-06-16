@@ -26,16 +26,37 @@
     <link rel="icon" type="image/png" sizes="512x512" href="{{ 'hos-logo-favicon-512.png' | asset_url }}">
     <link rel="apple-touch-icon" href="{{ 'hos-logo-favicon-512.png' | asset_url }}">
 
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    {%- liquid
+      if request.page_type == 'product'
+        assign hos_title = product.title | append: ' | House of Steam'
+        if collection != blank
+          assign hos_title = hos_title | append: ' — ' | append: collection.title | append: ' Gothic Fashion Berlin'
+        else
+          assign hos_title = hos_title | append: ' — Gothic Fashion Berlin'
+        endif
+        assign hos_description = product.title | append: ' — ' | append: product.description | strip_html | truncate: 100 | append: '. Gothic fashion from Berlin. Free EU shipping. 30-day returns. House of Steam.'
+      elsif request.page_type == 'collection'
+        assign hos_title = collection.title | append: ' | House of Steam — Gothic Fashion Berlin'
+        assign hos_description = collection.description | default: collection.title | strip_html | truncate: 130 | append: '. Gothic fashion from Berlin. Free EU shipping. 30-day returns. House of Steam.'
+      elsif request.page_type == 'article'
+        assign hos_title = article.title | append: ' | House of Steam — Gothic Fashion Berlin'
+        assign hos_description = article.excerpt_or_content | strip_html | truncate: 155
+      else
+        assign hos_title = page_title
+        unless page_title contains shop.name
+          assign hos_title = hos_title | append: ' | House of Steam'
+        endunless
+        assign hos_description = page_description | default: shop.description
+      endif
+      if current_page != 1
+        assign hos_title = hos_title | append: ' — Page ' | append: current_page
+      endif
+    -%}
+    <title>{{ hos_title | escape }}</title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- if hos_description != blank -%}
+      <meta name="description" content="{{ hos_description | strip_html | escape }}">
+    {%- endif -%}
 
     {% render 'meta-tags' %}
 
@@ -328,6 +349,17 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {%- render 'schema-org' -%}
+    {%- if request.page_type == 'product' -%}
+      {%- render 'schema-product', product: product -%}
+    {%- endif -%}
+    {%- if request.page_type == 'article' -%}
+      {%- render 'schema-article', article: article, blog: blog -%}
+    {%- endif -%}
+    {%- if request.page_type == 'collection' or request.page_type == 'product' or request.page_type == 'article' or request.page_type == 'blog' -%}
+      {%- render 'schema-breadcrumb', collection: collection, product: product, article: article, blog: blog -%}
+    {%- endif -%}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

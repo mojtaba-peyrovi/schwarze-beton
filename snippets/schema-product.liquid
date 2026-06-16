@@ -1,0 +1,58 @@
+{%- liquid
+  assign product_url = request.origin | append: product.url
+  assign product_image_url = ''
+  if product.featured_image
+    assign product_image_url = product.featured_image | image_url: width: 1200
+  endif
+  assign has_rating = false
+  if product.metafields.reviews.rating.value != blank
+    assign has_rating = true
+    assign rating_value = product.metafields.reviews.rating.value.rating
+    assign rating_max = product.metafields.reviews.rating.value.scale_max
+    assign rating_count = product.metafields.reviews.rating_count
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  "url": "{{ product_url }}",
+  {%- if product_image_url != '' -%}
+  "image": "https:{{ product_image_url }}",
+  {%- endif -%}
+  {%- if product.vendor != blank -%}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  {%- endif -%}
+  "sku": {{ product.selected_or_first_available_variant.sku | default: product.id | json }},
+  "offers": [
+    {%- for variant in product.variants -%}
+    {
+      "@type": "Offer",
+      "name": {{ variant.title | json }},
+      "sku": {{ variant.sku | default: variant.id | json }},
+      "price": "{{ variant.price | money_without_currency | strip_html }}",
+      "priceCurrency": "{{ cart.currency.iso_code }}",
+      "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+      "url": "{{ product_url }}?variant={{ variant.id }}",
+      "seller": {
+        "@type": "Organization",
+        "name": "House of Steam"
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+  {%- if has_rating -%}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ rating_value }}",
+    "bestRating": "{{ rating_max }}",
+    "ratingCount": "{{ rating_count }}"
+  }
+  {%- endif -%}
+}
+</script>

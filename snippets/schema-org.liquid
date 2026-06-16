@@ -1,0 +1,47 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ request.origin }}/#organization",
+      "name": "House of Steam",
+      "url": "{{ request.origin }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ 'hos-logo-dark-bg.png' | asset_url }}",
+        "width": 300,
+        "height": 60
+      },
+      "description": "Gothic fashion from Berlin. Handcrafted dark and alternative clothing for the bold.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "sameAs": [
+        {%- if settings.social_instagram_link != blank -%}"{{ settings.social_instagram_link }}"{% if settings.social_facebook_link != blank or settings.social_tiktok_link != blank %},{% endif %}{%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}"{{ settings.social_facebook_link }}"{% if settings.social_tiktok_link != blank %},{% endif %}{%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}"{{ settings.social_tiktok_link }}"{%- endif -%}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ request.origin }}/#website",
+      "url": "{{ request.origin }}",
+      "name": "House of Steam",
+      "publisher": {
+        "@id": "{{ request.origin }}/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ request.origin }}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
