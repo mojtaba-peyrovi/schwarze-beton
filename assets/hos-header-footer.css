@@ -259,6 +259,11 @@ follow-on-shop,
   align-items: center;
 }
 
+/* Force localization selects to same height as icon buttons */
+.js .header-localization:not(.menu-drawer__localization) .localization-form__select {
+  height: 4.4rem !important;
+}
+
 /* ── Country + language pickers side-by-side ── */
 .desktop-localization-wrapper {
   display: flex !important;
