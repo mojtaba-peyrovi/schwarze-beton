@@ -1,0 +1,160 @@
+/* ════════════════════════════════════════════
+   SCHWARZE BETON — Before / After Slider
+   ════════════════════════════════════════════ */
+
+/* ── Section wrapper (homepage) ── */
+.hos-bac-section {
+  padding: var(--space-xl) 0;
+  background: var(--bunker);
+}
+
+.hos-bac-section__header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+/* ── Core slider component ── */
+.bac {
+  position: relative;
+  overflow: hidden;
+  cursor: col-resize;
+  user-select: none;
+  -webkit-user-select: none;
+  background: var(--ash);
+  aspect-ratio: 16 / 9;
+}
+
+/* ── Image layers ── */
+.bac__before,
+.bac__after {
+  position: absolute;
+  inset: 0;
+}
+
+.bac__before img,
+.bac__after img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* After image: clipped to right of the divider */
+.bac__after {
+  clip-path: inset(0 0 0 var(--split, 50%));
+  transition: clip-path 0.05s ease-out;
+}
+
+.bac--instant .bac__after {
+  transition: none;
+}
+
+/* ── Labels ── */
+.bac__label {
+  position: absolute;
+  bottom: var(--space-sm);
+  font-family: var(--font-cinzel);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: rgba(8, 8, 8, 0.6);
+  padding: 0.3em 0.65em;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  pointer-events: none;
+}
+
+.bac__label--before { left: var(--space-sm); }
+.bac__label--after  { right: var(--space-sm); }
+
+/* Corner brackets */
+.bac__bracket {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-color: var(--crimson);
+  border-style: solid;
+  flex-shrink: 0;
+}
+
+.bac__bracket--tl { border-width: 1px 0 0 1px; }
+.bac__bracket--tr { border-width: 1px 1px 0 0; }
+
+/* ── Divider line ── */
+.bac__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split, 50%);
+  width: 2px;
+  background: var(--crimson);
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: left 0.05s ease-out;
+  z-index: 2;
+}
+
+.bac--instant .bac__divider {
+  transition: none;
+}
+
+/* ── Handle button ── */
+.bac__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  background: var(--crimson);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--parchment);
+  pointer-events: none;
+}
+
+/* ── Range input (keyboard access; visually hidden) ── */
+.bac__range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: col-resize;
+  margin: 0;
+  z-index: 5;
+  pointer-events: none; /* JS handles mouse/touch; range handles keyboard */
+}
+
+.bac__range:focus-visible ~ .bac__divider {
+  outline: 2px solid var(--parchment);
+  outline-offset: 2px;
+}
+
+/* Enable keyboard pointer events on focus */
+.bac__range:focus {
+  pointer-events: auto;
+}
+
+/* ── PDP block context ── */
+.hos-pdp .bac,
+.hos-bac-block .bac {
+  aspect-ratio: 16 / 7;
+}
+
+.hos-bac-block {
+  margin-top: var(--space-lg);
+}
+
+.hos-bac-block__heading {
+  font-family: var(--font-cinzel);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin: 0 0 var(--space-sm);
+}

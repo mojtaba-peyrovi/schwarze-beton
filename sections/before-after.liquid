@@ -1,0 +1,98 @@
+{{ 'section-before-after.css' | asset_url | stylesheet_tag }}
+
+{%- assign bac_before_img   = section.settings.before_image -%}
+{%- assign bac_after_img    = section.settings.after_image -%}
+{%- assign bac_before_label = section.settings.before_label | default: 'Vorher' -%}
+{%- assign bac_after_label  = section.settings.after_label  | default: 'Nachher' -%}
+{%- assign bac_initial      = section.settings.initial_position | default: 50 -%}
+
+{%- if bac_before_img == blank and bac_after_img == blank and request.design_mode == false -%}
+  {%- comment -%} Nothing to render outside the editor {%- endcomment -%}
+{%- else -%}
+
+<section class="hos-bac-section">
+
+  {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+    <div class="page-width hos-bac-section__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hos-section-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="hos-section-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="page-width">
+    {% render 'before-after-slider',
+      bac_before_img:   bac_before_img,
+      bac_after_img:    bac_after_img,
+      bac_before_label: bac_before_label,
+      bac_after_label:  bac_after_label,
+      bac_initial:      bac_initial
+    %}
+  </div>
+
+</section>
+
+{%- endif -%}
+
+<script src="{{ 'before-after.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Before / After",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Vergleich"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before image (Vorher)"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After image (Nachher)"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before label",
+      "default": "Vorher"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After label",
+      "default": "Nachher"
+    },
+    {
+      "type": "range",
+      "id": "initial_position",
+      "label": "Initial divider position",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After"
+    }
+  ]
+}
+{% endschema %}
