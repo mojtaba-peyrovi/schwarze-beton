@@ -14,9 +14,13 @@ shopify theme dev --theme 201484534105
 
 ## Push to draft theme
 
-```bash
-shopify theme push --theme 201484534105
+**Always use the safe push script** — it pulls the live templates first so any sections or images you added in the Shopify customizer are not lost:
+
+```powershell
+./push.ps1
 ```
+
+Do NOT run `shopify theme push` directly — it overwrites `templates/index.json` with the local version, erasing customizer changes.
 
 Never publish — the theme stays as a **Draft** until Task 15 QA passes.
 
