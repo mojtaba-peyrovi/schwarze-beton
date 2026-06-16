@@ -254,6 +254,11 @@ follow-on-shop,
   white-space: nowrap;
 }
 
+/* ── Header icons row — vertical centering ── */
+.header__icons {
+  align-items: center;
+}
+
 /* ── Country + language pickers side-by-side ── */
 .desktop-localization-wrapper {
   display: flex !important;

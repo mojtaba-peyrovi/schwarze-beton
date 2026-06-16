@@ -163,9 +163,12 @@
                 }}
               </div>
             {%- else -%}
-              <div class="hos-logo-text">
-                <span class="hos-logo-name">{{ shop.name }}</span>
-                <span class="hos-logo-tag">Dress for the Dark</span>
+              <div class="header__heading-logo-wrapper">
+                <img src="{{ 'hos-logo-dark-transparent.png' | asset_url }}"
+                     alt="{{ shop.name }}"
+                     class="header__heading-logo motion-reduce"
+                     width="160"
+                     height="40">
               </div>
             {%- endif -%}
           </a>
@@ -206,9 +209,12 @@
                 }}
               </div>
             {%- else -%}
-              <div class="hos-logo-text">
-                <span class="hos-logo-name">{{ shop.name }}</span>
-                <span class="hos-logo-tag">Dress for the Dark</span>
+              <div class="header__heading-logo-wrapper">
+                <img src="{{ 'hos-logo-dark-transparent.png' | asset_url }}"
+                     alt="{{ shop.name }}"
+                     class="header__heading-logo motion-reduce"
+                     width="160"
+                     height="40">
               </div>
             {%- endif -%}
           </a>
