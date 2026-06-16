@@ -5,10 +5,10 @@
 /* ── Shared utilities ── */
 .hos-section-eyebrow {
   font-family: var(--font-cinzel);
-  font-size: 0.7rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0 0 0.75rem;
 }
 
@@ -34,9 +34,9 @@
 }
 
 .hos-btn--primary {
-  background: var(--schrei);
+  background: var(--crimson);
   color: var(--parchment);
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 .hos-btn--primary:hover {
   background: var(--blood);
@@ -73,7 +73,7 @@
   white-space: nowrap;
 }
 .hos-link-arrow:hover {
-  color: var(--schrei);
+  color: var(--crimson);
 }
 
 .hos-empty {
@@ -104,10 +104,10 @@
 
 .hos-hero__eyebrow {
   font-family: var(--font-cinzel);
-  font-size: 0.68rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0;
 }
 
@@ -126,14 +126,14 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0;
 }
 
 .hos-hero__body {
   color: var(--bone);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1.5rem;
+  line-height: 1.7;
   max-width: 38ch;
 }
 .hos-hero__body p { margin: 0; }
@@ -187,10 +187,10 @@
   height: 24px;
   z-index: 2;
 }
-.hos-hero__corner--tl { top: 20px; left: 20px; border-top: 2px solid var(--schrei); border-left: 2px solid var(--schrei); }
-.hos-hero__corner--tr { top: 20px; right: 20px; border-top: 2px solid var(--schrei); border-right: 2px solid var(--schrei); }
-.hos-hero__corner--bl { bottom: 20px; left: 20px; border-bottom: 2px solid var(--schrei); border-left: 2px solid var(--schrei); }
-.hos-hero__corner--br { bottom: 20px; right: 20px; border-bottom: 2px solid var(--schrei); border-right: 2px solid var(--schrei); }
+.hos-hero__corner--tl { top: 20px; left: 20px; border-top: 2px solid var(--crimson); border-left: 2px solid var(--crimson); }
+.hos-hero__corner--tr { top: 20px; right: 20px; border-top: 2px solid var(--crimson); border-right: 2px solid var(--crimson); }
+.hos-hero__corner--bl { bottom: 20px; left: 20px; border-bottom: 2px solid var(--crimson); border-left: 2px solid var(--crimson); }
+.hos-hero__corner--br { bottom: 20px; right: 20px; border-bottom: 2px solid var(--crimson); border-right: 2px solid var(--crimson); }
 
 .hos-hero__product-label {
   position: absolute;
@@ -214,13 +214,13 @@
 .hos-hero__product-price {
   font-family: var(--font-cinzel);
   font-size: 0.9rem;
-  color: var(--schrei);
+  color: var(--crimson);
   font-weight: 700;
 }
 
 .hos-hero__rule {
   height: 2px;
-  background: var(--schrei);
+  background: var(--crimson);
 }
 
 @media (max-width: 749px) {
@@ -287,7 +287,7 @@
 }
 
 .hos-marquee__sep {
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 0.5rem;
   flex-shrink: 0;
 }
@@ -314,12 +314,12 @@
   transition: border-color 0.2s;
 }
 .hos-feature-bar__item:hover {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 .hos-feature-bar__glyph {
   font-size: 1.4rem;
-  color: var(--schrei);
+  color: var(--crimson);
   flex-shrink: 0;
   line-height: 1;
   margin-top: 2px;
@@ -336,7 +336,7 @@
 }
 
 .hos-feature-bar__desc {
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   color: var(--iron);
   margin: 0;
   line-height: 1.5;
@@ -430,7 +430,7 @@
   position: absolute;
   top: var(--space-sm);
   left: var(--space-sm);
-  background: var(--schrei);
+  background: var(--crimson);
   color: var(--parchment);
   font-family: var(--font-cinzel);
   font-size: 0.6rem;
@@ -469,7 +469,7 @@
 .hos-product-card__price {
   font-family: var(--font-cinzel);
   font-size: 0.85rem;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0;
   display: flex;
   gap: 0.5rem;
@@ -483,7 +483,7 @@
 
 /* ── Manifesto ── */
 .hos-manifesto {
-  background: var(--schrei);
+  background: var(--crimson);
   padding: var(--space-2xl) 0;
   position: relative;
   overflow: hidden;
@@ -612,7 +612,7 @@
 
 .hos-mosaic__glyph {
   font-size: 1rem;
-  color: var(--schrei);
+  color: var(--crimson);
   margin-bottom: 0.25rem;
 }
 
@@ -640,7 +640,7 @@
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 1rem;
   opacity: 0;
   transform: translateX(-6px);
@@ -662,7 +662,7 @@
   z-index: 2;
 }
 .hos-mosaic__tile:hover::after {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 @media (max-width: 749px) {
@@ -702,8 +702,8 @@
 
 .hos-brand-story__body {
   color: var(--bone);
-  line-height: 1.7;
-  font-size: 0.95rem;
+  line-height: 1.75;
+  font-size: 1.5rem;
   max-width: 52ch;
 }
 .hos-brand-story__body p { margin: 0; }
@@ -726,7 +726,7 @@
 .hos-brand-story__stat-number {
   font-family: var(--font-medieval);
   font-size: clamp(1.4rem, 2.5vw, 2rem);
-  color: var(--schrei);
+  color: var(--crimson);
   line-height: 1;
 }
 
@@ -774,10 +774,10 @@
   height: 20px;
   z-index: 1;
 }
-.hos-brand-story__bracket--tl { top: 16px; left: 16px; border-top: 1px solid var(--schrei); border-left: 1px solid var(--schrei); }
-.hos-brand-story__bracket--tr { top: 16px; right: 16px; border-top: 1px solid var(--schrei); border-right: 1px solid var(--schrei); }
-.hos-brand-story__bracket--bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--schrei); border-left: 1px solid var(--schrei); }
-.hos-brand-story__bracket--br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--schrei); border-right: 1px solid var(--schrei); }
+.hos-brand-story__bracket--tl { top: 16px; left: 16px; border-top: 1px solid var(--crimson); border-left: 1px solid var(--crimson); }
+.hos-brand-story__bracket--tr { top: 16px; right: 16px; border-top: 1px solid var(--crimson); border-right: 1px solid var(--crimson); }
+.hos-brand-story__bracket--bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--crimson); border-left: 1px solid var(--crimson); }
+.hos-brand-story__bracket--br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--crimson); border-right: 1px solid var(--crimson); }
 
 .hos-brand-story__logo {
   width: 60%;
@@ -797,7 +797,7 @@
 /* ── Newsletter ── */
 .hos-newsletter {
   background: var(--void);
-  border-top: 2px solid var(--schrei);
+  border-top: 2px solid var(--crimson);
   padding: var(--space-xl) 0;
 }
 
@@ -810,7 +810,7 @@
 
 .hos-newsletter__sub {
   color: var(--iron);
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   margin: -0.5rem 0 0;
   line-height: 1.6;
 }
@@ -836,7 +836,7 @@
   color: var(--dust);
 }
 .hos-newsletter__input:focus {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 .hos-newsletter__form .hos-btn--primary {
@@ -852,7 +852,7 @@
 }
 
 .hos-newsletter__error {
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 0.8rem;
   margin-top: 0.5rem;
 }

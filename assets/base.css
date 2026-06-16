@@ -9,21 +9,24 @@
   --ash:        #262626;
 
   /* Text */
-  --dust:       #4a4a4a;
+  --dust:       #888888;
   --iron:       #666666;
   --bone:       #bdb5a8;
   --parchment:  #e4ddd3;
 
   /* Accents */
-  --schrei:     #b8301f;
-  --blood:      #6e1510;
-  --schrei-dim: rgba(184, 48, 31, 0.12);
+  --crimson:     #b8301f;
+  --blood:       #6e1510;
+  --crimson-dim: rgba(184, 48, 31, 0.12);
 
   /* Fonts */
-  --font-medieval:  'Cinzel Decorative', serif;
+  --font-medieval:  'Pirata One', 'Cinzel Decorative', serif;
   --font-cinzel:    'Cinzel', serif;
   --font-display:   'Barlow Condensed', sans-serif;
   --font-body:      'Barlow', sans-serif;
+
+  /* Eyebrow size — used site-wide */
+  --eyebrow-size: 0.85rem;
 
   /* Spacing (8px base unit) */
   --space-xs:  8px;
@@ -66,6 +69,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.05;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 1.75;
 }
 
 a {

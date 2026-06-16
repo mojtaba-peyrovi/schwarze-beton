@@ -57,7 +57,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-cinzel);
-  font-size: 0.62rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--crimson);
@@ -72,7 +72,7 @@
   position: absolute;
   bottom: var(--space-sm);
   font-family: var(--font-cinzel);
-  font-size: 0.62rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--parchment);

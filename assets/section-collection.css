@@ -33,10 +33,10 @@
 
 .hos-col-banner__breadcrumb {
   font-family: var(--font-cinzel);
-  font-size: 0.65rem;
+  font-size: 1.1rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--iron);
+  color: var(--dust);
   margin: 0;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
 }
 
 .hos-col-banner__breadcrumb a {
-  color: var(--iron);
+  color: var(--dust);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -54,16 +54,16 @@
 }
 
 .hos-col-banner__breadcrumb-sep {
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 0.55rem;
 }
 
 .hos-col-banner__eyebrow {
   font-family: var(--font-cinzel);
-  font-size: 0.68rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: var(--space-xs) 0 0;
 }
 
@@ -77,24 +77,24 @@
 
 .hos-col-banner__meta {
   font-family: var(--font-cinzel);
-  font-size: 0.7rem;
+  font-size: 1.1rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--iron);
+  color: var(--dust);
   margin: 0;
 }
 
 .hos-col-banner__desc {
   color: var(--bone);
-  font-size: 0.9rem;
-  line-height: 1.65;
+  font-size: 1.5rem;
+  line-height: 1.7;
   margin: 0;
 }
 .hos-col-banner__desc p { margin: 0; }
 
 .hos-col-banner__rule {
   height: 2px;
-  background: var(--schrei);
+  background: var(--crimson);
   width: 60px;
   margin-top: var(--space-xs);
 }
@@ -141,16 +141,16 @@
 
 .hos-col-topbar__count {
   font-family: var(--font-cinzel);
-  font-size: 0.7rem;
+  font-size: 1.2rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--iron);
+  color: var(--dust);
   margin: 0;
 }
 
 .hos-sort-select {
   font-family: var(--font-cinzel);
-  font-size: 0.72rem;
+  font-size: 1.2rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: var(--concrete);
@@ -167,7 +167,7 @@
 }
 .hos-sort-select:focus {
   outline: none;
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 /* ── Active Filter Tags ── */
@@ -184,7 +184,7 @@
   align-items: center;
   gap: 0.4em;
   font-family: var(--font-cinzel);
-  font-size: 0.62rem;
+  font-size: 1.1rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--bone);
@@ -195,18 +195,18 @@
   transition: border-color 0.2s, color 0.2s;
 }
 .hos-active-filter-tag:hover {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
   color: var(--parchment);
 }
 
 .hos-active-filter-tag__x {
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 0.75em;
 }
 
 .hos-clear-filters {
   font-family: var(--font-cinzel);
-  font-size: 0.62rem;
+  font-size: 1.1rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--iron);
@@ -219,7 +219,7 @@
   padding: 0;
 }
 .hos-clear-filters:hover {
-  color: var(--schrei);
+  color: var(--crimson);
 }
 
 /* ── Filter Sidebar (desktop) ── */
@@ -239,7 +239,7 @@
 
 .hos-filter-sidebar__title {
   font-family: var(--font-cinzel);
-  font-size: 0.72rem;
+  font-size: 1.2rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--parchment);
@@ -264,15 +264,15 @@
 
 .hos-filter-group__label {
   font-family: var(--font-cinzel);
-  font-size: 0.7rem;
+  font-size: 1.2rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--bone);
 }
 
 .hos-filter-group__arrow {
-  color: var(--schrei);
-  font-size: 0.7rem;
+  color: var(--crimson);
+  font-size: 1rem;
   transition: transform 0.2s;
   flex-shrink: 0;
 }
@@ -296,7 +296,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.78rem;
+  font-size: 1.3rem;
   color: var(--bone);
   cursor: pointer;
   text-decoration: none;
@@ -324,12 +324,12 @@
   transition: border-color 0.15s, background 0.15s;
 }
 .hos-filter-option input[type="checkbox"]:checked {
-  background: var(--schrei);
-  border-color: var(--schrei);
+  background: var(--crimson);
+  border-color: var(--crimson);
 }
 .hos-filter-option input[type="checkbox"]:focus {
   outline: none;
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 .hos-filter-option input[type="checkbox"]:disabled {
   opacity: 0.3;
@@ -338,8 +338,8 @@
 
 .hos-filter-count {
   margin-left: auto;
-  font-size: 0.65rem;
-  color: var(--iron);
+  font-size: 1.1rem;
+  color: var(--dust);
   font-style: italic;
 }
 
@@ -352,7 +352,7 @@
 
 .hos-filter-price__input {
   font-family: var(--font-cinzel);
-  font-size: 0.7rem;
+  font-size: 1.2rem;
   background: var(--concrete);
   border: 1px solid var(--ash);
   color: var(--parchment);
@@ -362,21 +362,21 @@
 }
 .hos-filter-price__input:focus {
   outline: none;
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 .hos-filter-price__sep {
-  color: var(--iron);
-  font-size: 0.7rem;
+  color: var(--dust);
+  font-size: 1.2rem;
   flex-shrink: 0;
 }
 
 .hos-filter-apply {
   font-family: var(--font-cinzel);
-  font-size: 0.62rem;
+  font-size: 1.1rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background: var(--schrei);
+  background: var(--crimson);
   color: var(--parchment);
   border: none;
   padding: 0.5em 1em;
@@ -408,7 +408,7 @@
   transition: border-color 0.2s;
 }
 .hos-filter-toggle:hover {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
 }
 
 /* ── Mobile Filter Drawer ── */
@@ -469,7 +469,7 @@
 .hos-filter-drawer__close {
   background: none;
   border: none;
-  color: var(--schrei);
+  color: var(--crimson);
   font-size: 1.1rem;
   cursor: pointer;
   padding: 0;
@@ -506,12 +506,12 @@
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 .hos-pagination__item:hover {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
   color: var(--parchment);
 }
 .hos-pagination__item--active {
-  background: var(--schrei);
-  border-color: var(--schrei);
+  background: var(--crimson);
+  border-color: var(--crimson);
   color: var(--parchment);
 }
 .hos-pagination__item--disabled {

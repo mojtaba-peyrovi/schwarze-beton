@@ -110,7 +110,7 @@
 }
 
 .hos-pdp__thumb:hover { border-color: var(--bone); }
-.hos-pdp__thumb--active { border-color: var(--schrei); }
+.hos-pdp__thumb--active { border-color: var(--crimson); }
 
 /* ── Info panel ── */
 .hos-pdp__info {
@@ -124,7 +124,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0;
 }
 
@@ -148,7 +148,7 @@
   font-family: var(--font-cinzel);
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--schrei);
+  color: var(--crimson);
   letter-spacing: 0.03em;
 }
 
@@ -165,7 +165,7 @@
   font-size: 0.58rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: var(--schrei);
+  background: var(--crimson);
   color: var(--parchment);
   padding: 0.2em 0.6em;
   align-self: center;
@@ -203,7 +203,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   cursor: pointer;
   padding: 0;
   text-decoration: underline;
@@ -237,7 +237,7 @@
   color: var(--parchment);
 }
 .hos-pdp__option-btn--selected {
-  border-color: var(--schrei);
+  border-color: var(--crimson);
   color: var(--parchment);
 }
 .hos-pdp__option-btn--unavailable {
@@ -262,8 +262,8 @@
 }
 .hos-pdp__color-swatch:hover { border-color: var(--bone); }
 .hos-pdp__color-swatch--selected {
-  border-color: var(--schrei);
-  outline: 1px solid var(--schrei);
+  border-color: var(--crimson);
+  outline: 1px solid var(--crimson);
   outline-offset: 1px;
 }
 
@@ -347,7 +347,7 @@
 }
 .hos-pdp__desc p:first-child { margin-top: 0; }
 .hos-pdp__desc p:last-child { margin-bottom: 0; }
-.hos-pdp__desc a { color: var(--schrei); }
+.hos-pdp__desc a { color: var(--crimson); }
 .hos-pdp__desc a:hover { color: var(--blood); }
 .hos-pdp__desc strong { color: var(--parchment); }
 
@@ -378,7 +378,7 @@
 /* ── Related products section ── */
 .hos-related {
   background: var(--bunker);
-  border-top: 2px solid var(--schrei);
+  border-top: 2px solid var(--crimson);
   padding: var(--space-2xl) 0;
 }
 
@@ -388,10 +388,10 @@
 
 .hos-related__eyebrow {
   font-family: var(--font-cinzel);
-  font-size: 0.65rem;
+  font-size: var(--eyebrow-size);
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--schrei);
+  color: var(--crimson);
   margin: 0 0 0.5rem;
 }
 
