@@ -1,23 +1,144 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
+<style>
+  .template-404 {
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 0 10rem;
+    text-align: center;
+  }
+
+  .template-404__watermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    font-family: var(--font-heading-family, 'Cinzel Decorative', serif);
+    font-size: clamp(10rem, 30vw, 22rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: currentColor;
+    user-select: none;
+  }
+
+  .template-404__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .template-404__eyebrow {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin: 0 0 2rem;
+  }
+
+  .template-404__title {
+    font-family: var(--font-heading-family, 'Cinzel Decorative', serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1.6rem;
+  }
+
+  .template-404__subtitle {
+    font-size: 1.6rem;
+    opacity: 0.65;
+    margin: 0 0 4rem;
+    font-style: italic;
+  }
+
+  .template-404__search {
+    display: flex;
+    max-width: 44rem;
+    margin: 0 auto 3rem;
+    border: 1px solid rgba(var(--color-foreground), 0.2);
+  }
+
+  .template-404__search input[type='search'] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 1.2rem 1.6rem;
+    font-size: 1.4rem;
+    color: inherit;
+    outline: none;
+  }
+
+  .template-404__search button {
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(var(--color-foreground), 0.2);
+    padding: 1.2rem 1.6rem;
+    cursor: pointer;
+    color: inherit;
+    display: flex;
+    align-items: center;
+  }
+
+  .template-404__search button .icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .template-404__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    justify-content: center;
+    margin-top: 1.6rem;
   }
 
   @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
+    .template-404 {
+      padding: 12rem 0 14rem;
     }
   }
 </style>
 
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+<div class="template-404 page-width">
+  <div class="template-404__watermark" aria-hidden="true">404</div>
+
+  <div class="template-404__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <p class="template-404__eyebrow">Error 404</p>
+
+    <h1 class="template-404__title">
+      Nothing here yet.
+    </h1>
+
+    <p class="template-404__subtitle">
+      The dark is patient.
+    </p>
+
+    <form action="{{ routes.search_url }}" method="get" class="template-404__search" role="search">
+      <input
+        type="search"
+        name="q"
+        placeholder="Search the collection&hellip;"
+        aria-label="{{ 'general.search.search' | t }}"
+        autocomplete="off"
+      >
+      <button type="submit" aria-label="{{ 'general.search.search' | t }}">
+        <span class="svg-wrapper">
+          {{- 'icon-search.svg' | inline_asset_content -}}
+        </span>
+      </button>
+    </form>
+
+    <div class="template-404__links">
+      <a href="{{ routes.all_products_collection_url }}" class="button">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+      <a href="{{ routes.collections_url }}" class="button button--secondary">
+        Browse all collections
+      </a>
+    </div>
+  </div>
 </div>

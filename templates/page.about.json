@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 0
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Forged in darkness. Worn with intention.",
+        "body": "<p>House of Schwarze Beton was built for those who wear their convictions — not their trends. Every piece is designed with intention: stainless steel that endures, gothic forms that speak without words, and a commitment to the craft that outlasts fashion cycles.</p>",
+        "padding_top": 36,
+        "padding_bottom": 60
+      },
+      "blocks": {}
+    }
+  },
+  "order": [
+    "main",
+    "brand_story"
+  ]
+}
