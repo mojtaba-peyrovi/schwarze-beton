@@ -94,6 +94,26 @@
       "block_order": ["feat_1", "feat_2", "feat_3", "feat_4"],
       "settings": {}
     },
+    "hos_tryon_teaser": {
+      "type": "tryon-teaser",
+      "settings": {
+        "eyebrow": "Virtual Experience",
+        "heading": "Digital Fitting Room",
+        "body": "See how each piece looks on you before it becomes yours.",
+        "cta_label": "Try On Now",
+        "cta_url": "#"
+      }
+    },
+    "hos_before_after": {
+      "type": "before-after",
+      "settings": {
+        "eyebrow": "Before & After",
+        "heading": "",
+        "before_label": "Before",
+        "after_label": "After",
+        "initial_position": 50
+      }
+    },
     "hos_featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -173,6 +193,8 @@
     "hos_hero",
     "hos_marquee",
     "hos_feature_bar",
+    "hos_tryon_teaser",
+    "hos_before_after",
     "hos_featured_collection",
     "hos_manifesto",
     "hos_collection_mosaic",
