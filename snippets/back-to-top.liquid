@@ -1,0 +1,89 @@
+{% comment %}
+  Back-to-Top — Phase 10.3
+  Fixed bottom-right; appears after 600px scroll; smooth scroll; keyboard accessible.
+  Reduced-motion: instant scroll.
+  Usage: {% render 'back-to-top' %}
+{% endcomment %}
+
+<button
+  id="back-to-top"
+  class="back-to-top"
+  aria-label="{{ 'accessibility.back_to_top' | t | default: 'Back to top' }}"
+  hidden
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+    <path d="M10 15V5M10 5L5 10M10 5l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  </svg>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    bottom: 2.4rem;
+    right: 2.4rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    background: var(--concrete);
+    color: var(--crimson);
+    border: 1px solid var(--ash);
+    border-radius: 0;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+    pointer-events: none;
+  }
+
+  .back-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .back-to-top:hover { background: var(--ash); }
+
+  .back-to-top:focus-visible {
+    outline: 2px solid var(--crimson);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  (function () {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    const THRESHOLD = 600;
+    let ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          const past = window.scrollY > THRESHOLD;
+          btn.hidden = false;
+          btn.classList.toggle('is-visible', past);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    btn.addEventListener('click', function () {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: prefersReduced ? 'instant' : 'smooth' });
+    });
+
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  })();
+</script>

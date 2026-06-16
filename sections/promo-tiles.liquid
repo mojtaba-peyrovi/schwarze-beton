@@ -1,0 +1,214 @@
+{% comment %}
+  Promo Tiles — Phase 10.2
+  2–3 clickable promotional banners (image + heading + CTA), block-based, Impulse pattern.
+  Usable on homepage, collection pages, and any template.
+{% endcomment %}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="promo-tiles page-width section-{{ section.id }}-padding">
+    <div class="promo-tiles__grid promo-tiles__grid--{{ section.blocks.size }}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign has_image = false
+          if block.settings.image != blank
+            assign has_image = true
+          endif
+        -%}
+        <div class="promo-tile" {{ block.shopify_attributes }}>
+          <a
+            class="promo-tile__link"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+          >
+            <div class="promo-tile__media">
+              {%- if has_image -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 800 }} 800w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w
+                  "
+                  sizes="(min-width: 990px) {{ 100 | divided_by: section.blocks.size }}vw, (min-width: 750px) 50vw, 100vw"
+                  alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg promo-tile__placeholder' }}
+              {%- endif -%}
+              <div class="promo-tile__overlay"></div>
+            </div>
+            <div class="promo-tile__content">
+              {%- if block.settings.heading != blank -%}
+                <h3 class="promo-tile__heading">{{ block.settings.heading | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.cta_label != blank -%}
+                <span class="promo-tile__cta">{{ block.settings.cta_label | escape }}</span>
+              {%- endif -%}
+            </div>
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% style %}
+  .promo-tiles { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+
+  .promo-tiles__grid {
+    display: grid;
+    gap: 1.6rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 750px) {
+    .promo-tiles__grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .promo-tiles__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .promo-tile { position: relative; overflow: hidden; }
+
+  .promo-tile__link {
+    display: block;
+    text-decoration: none;
+    color: var(--parchment);
+    position: relative;
+  }
+
+  .promo-tile__media {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  .promo-tile__media img,
+  .promo-tile__media .promo-tile__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .promo-tile__link:hover .promo-tile__media img { transform: scale(1.04); }
+
+  .promo-tile__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.75) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  .promo-tile__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.4rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .promo-tile__heading {
+    font-family: var(--font-cinzel);
+    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+
+  .promo-tile__cta {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    border-bottom: 1px solid var(--crimson);
+    padding-bottom: 0.2rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .promo-tile__link:hover .promo-tile__cta {
+    color: var(--crimson);
+    border-color: var(--crimson);
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Promo Tiles",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Promo tile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop the Collection"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Explore now"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Tiles",
+      "blocks": [
+        { "type": "tile" },
+        { "type": "tile" },
+        { "type": "tile" }
+      ]
+    }
+  ]
+}
+{% endschema %}

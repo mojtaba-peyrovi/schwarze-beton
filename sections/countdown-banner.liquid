@@ -1,0 +1,234 @@
+{% comment %}
+  Countdown Banner — Phase 10.1
+  Settings: end_datetime, timezone, heading, subtext, cta_label, cta_url, bg_style
+  Embeddable on any page via Theme Editor.
+{% endcomment %}
+
+{%- liquid
+  assign bg_class = 'countdown-banner--bunker'
+  if section.settings.bg_style == 'crimson'
+    assign bg_class = 'countdown-banner--crimson'
+  endif
+-%}
+
+<div
+  class="countdown-banner {{ bg_class }}"
+  data-end="{{ section.settings.end_datetime }}"
+  data-timezone="{{ section.settings.timezone }}"
+  id="countdown-{{ section.id }}"
+  role="timer"
+  aria-live="off"
+>
+  <div class="countdown-banner__inner page-width">
+    {%- if section.settings.heading != blank -%}
+      <p class="countdown-banner__heading">{{ section.settings.heading | escape }}</p>
+    {%- endif -%}
+
+    <div class="countdown-banner__clock" aria-hidden="true">
+      <span class="countdown-unit">
+        <span class="countdown-digits" data-unit="days">00</span>
+        <span class="countdown-label">days</span>
+      </span>
+      <span class="countdown-sep">:</span>
+      <span class="countdown-unit">
+        <span class="countdown-digits" data-unit="hours">00</span>
+        <span class="countdown-label">hrs</span>
+      </span>
+      <span class="countdown-sep">:</span>
+      <span class="countdown-unit">
+        <span class="countdown-digits" data-unit="minutes">00</span>
+        <span class="countdown-label">min</span>
+      </span>
+      <span class="countdown-sep">:</span>
+      <span class="countdown-unit">
+        <span class="countdown-digits" data-unit="seconds">00</span>
+        <span class="countdown-label">sec</span>
+      </span>
+    </div>
+
+    <p class="countdown-banner__ended visually-hidden" data-ended-message>
+      {{ section.settings.ended_message | default: 'This offer has ended.' | escape }}
+    </p>
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="countdown-banner__subtext">{{ section.settings.subtext | escape }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+      <a href="{{ section.settings.cta_url }}" class="countdown-banner__cta button">
+        {{ section.settings.cta_label | escape }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .countdown-banner {
+    padding: 2rem 0;
+    text-align: center;
+  }
+  .countdown-banner--bunker { background: var(--bunker); }
+  .countdown-banner--crimson { background: var(--crimson); }
+
+  .countdown-banner__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem 3.2rem;
+  }
+
+  .countdown-banner__heading {
+    font-family: var(--font-cinzel);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    margin: 0;
+  }
+
+  .countdown-banner__clock {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.4rem;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 4rem;
+  }
+
+  .countdown-digits {
+    font-family: var(--font-cinzel);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--parchment);
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .countdown-label {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-top: 0.2rem;
+  }
+
+  .countdown-sep {
+    font-family: var(--font-cinzel);
+    font-size: 2.4rem;
+    color: var(--crimson);
+    line-height: 1.1;
+    padding-bottom: 0.6rem;
+  }
+
+  .countdown-banner--crimson .countdown-sep,
+  .countdown-banner--crimson .countdown-digits { color: #fff; }
+  .countdown-banner--crimson .countdown-label { color: rgba(255,255,255,0.7); }
+
+  .countdown-banner__subtext {
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    color: var(--bone);
+    margin: 0;
+  }
+
+  .countdown-banner__cta {
+    font-family: var(--font-cinzel);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--crimson);
+    color: var(--parchment);
+    background: transparent;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .countdown-banner__cta:hover { background: var(--crimson); color: #fff; }
+  .countdown-banner--crimson .countdown-banner__cta {
+    border-color: #fff;
+    color: #fff;
+  }
+  .countdown-banner--crimson .countdown-banner__cta:hover { background: rgba(255,255,255,0.15); }
+
+  .countdown-banner__ended { color: var(--parchment); font-family: var(--font-cinzel); margin: 0; }
+</style>
+
+<script src="{{ 'countdown.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Countdown Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Limited Time Offer"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext"
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "End date & time (ISO 8601)",
+      "info": "Format: 2025-12-31T23:59:59. Time is interpreted in the selected timezone.",
+      "default": "2025-12-31T23:59:59"
+    },
+    {
+      "type": "select",
+      "id": "timezone",
+      "label": "Timezone",
+      "options": [
+        { "value": "UTC", "label": "UTC" },
+        { "value": "Europe/London", "label": "London (GMT/BST)" },
+        { "value": "Europe/Berlin", "label": "Berlin (CET/CEST)" },
+        { "value": "America/New_York", "label": "New York (ET)" },
+        { "value": "America/Los_Angeles", "label": "Los Angeles (PT)" }
+      ],
+      "default": "UTC"
+    },
+    {
+      "type": "text",
+      "id": "ended_message",
+      "label": "Ended message",
+      "default": "This offer has ended."
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label"
+    },
+    {
+      "type": "select",
+      "id": "bg_style",
+      "label": "Background",
+      "options": [
+        { "value": "bunker", "label": "Dark (Bunker)" },
+        { "value": "crimson", "label": "Crimson" }
+      ],
+      "default": "bunker"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Banner"
+    }
+  ]
+}
+{% endschema %}

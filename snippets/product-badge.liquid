@@ -1,0 +1,86 @@
+{%- comment -%}
+  Product Badges — Phase 10.5
+  Renders New / Sale / Sold Out / Low Stock badges.
+  Accepts:
+    - product: product object
+    - variant: variant object (optional, defaults to first available)
+    - new_days: integer, days after created_at to show "New" badge (default 30)
+  Usage: {% render 'product-badge', product: product, variant: product.selected_or_first_available_variant %}
+{%- endcomment -%}
+
+{%- liquid
+  assign badge_variant   = variant | default: product.selected_or_first_available_variant
+  assign new_days        = new_days | default: 30
+  assign new_threshold   = new_days | times: 86400
+  assign created_seconds = product.created_at | date: '%s' | plus: 0
+  assign now_seconds     = 'now' | date: '%s' | plus: 0
+  assign age_seconds     = now_seconds | minus: created_seconds
+  assign is_new          = false
+  if age_seconds <= new_threshold
+    assign is_new = true
+  endif
+
+  assign is_sold_out  = false
+  assign is_sale      = false
+  assign is_low_stock = false
+
+  if badge_variant.available == false or product.available == false
+    assign is_sold_out = true
+  endif
+
+  if product.compare_at_price > product.price and product.available
+    assign is_sale = true
+  endif
+
+  assign low_stock_threshold = 5
+  if badge_variant.inventory_management == 'shopify' and badge_variant.inventory_quantity > 0 and badge_variant.inventory_quantity <= low_stock_threshold
+    assign is_low_stock = true
+  endif
+-%}
+
+{%- if is_sold_out or is_sale or is_new or is_low_stock -%}
+  <div class="hos-badges">
+    {%- if is_sold_out -%}
+      <span class="hos-badge hos-badge--neutral">{{ 'products.product.sold_out' | t }}</span>
+    {%- elsif is_sale -%}
+      <span class="hos-badge hos-badge--sale">{{ 'products.product.on_sale' | t }}</span>
+    {%- endif -%}
+    {%- if is_low_stock and is_sold_out == false -%}
+      <span class="hos-badge hos-badge--neutral">Low stock</span>
+    {%- endif -%}
+    {%- if is_new and is_sold_out == false -%}
+      <span class="hos-badge hos-badge--neutral">New</span>
+    {%- endif -%}
+  </div>
+
+  <style>
+    .hos-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .hos-badge {
+      display: inline-block;
+      font-family: var(--font-cinzel);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      line-height: 1.6;
+      border-radius: 0;
+    }
+
+    .hos-badge--sale {
+      background: var(--crimson);
+      color: #fff;
+    }
+
+    .hos-badge--neutral {
+      background: transparent;
+      color: var(--bone);
+      border: 1px solid var(--ash);
+    }
+  </style>
+{%- endif -%}

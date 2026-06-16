@@ -1,11 +1,9 @@
 {%- comment -%}
-  Renders color swatches for variant color options in the product card.
-  Accepts: product (product object)
-  Usage: {% render 'color-swatch', product: product %}
-
-  Matches option names: Color / Colour / Farbe (case-insensitive).
-  Swatches are purely visual; background color is set from the value name.
-  Common CSS color names work out of the box (black, white, red, etc.).
+  Color Swatches — Phase 10.4 (polished)
+  Source priority: variant metafield color → named CSS color → swatch image from metaobject.
+  Selected state: 1px --crimson ring. Sold-out: diagonal strike.
+  Accepts: product, selected_variant (optional)
+  Usage: {% render 'color-swatch', product: product, selected_variant: product.selected_or_first_available_variant %}
 {%- endcomment -%}
 
 {%- assign color_option = nil -%}
@@ -17,16 +15,90 @@
   {%- endif -%}
 {%- endfor -%}
 
-{%- if color_option != nil and color_option.values.size > 1 -%}
+{%- if color_option != nil and color_option.values.size > 0 -%}
   <div class="hos-swatches" aria-label="{{ 'general.accessibility.available_colors' | t | default: 'Available colors' }}">
     {%- for value in color_option.values -%}
-      {%- assign swatch_color = value | downcase | replace: ' ', '' -%}
+      {%- liquid
+        assign slug        = value | handleize
+        assign swatch_bg   = nil
+        assign swatch_img  = nil
+        assign is_selected = false
+        assign is_soldout  = false
+
+        if selected_variant != nil and selected_variant != blank
+          assign selected_color = selected_variant.options[forloop.index0] | handleize
+          if selected_color == slug
+            assign is_selected = true
+          endif
+        endif
+
+        for variant in product.variants
+          if variant.options contains value
+            unless variant.available
+              assign is_soldout = true
+            endunless
+          endif
+        endfor
+
+        assign meta_color = product.metafields.swatches[slug].value
+        if meta_color != blank
+          assign swatch_bg = meta_color
+        else
+          assign css_color = value | downcase | replace: ' ', ''
+          assign swatch_bg = css_color
+        endif
+
+        assign meta_img = product.metafields.swatch_images[slug].value
+        if meta_img != blank
+          assign swatch_img = meta_img | image_url: width: 50
+        endif
+      -%}
       <span
-        class="hos-swatch"
+        class="hos-swatch{% if is_selected %} hos-swatch--selected{% endif %}{% if is_soldout %} hos-swatch--soldout{% endif %}"
         title="{{ value | escape }}"
-        aria-label="{{ value | escape }}"
-        style="background-color: {{ swatch_color }};"
+        aria-label="{{ value | escape }}{% if is_soldout %} — {{ 'products.product.sold_out' | t }}{% endif %}"
+        {% if swatch_img != blank %}
+          style="background-image: url('{{ swatch_img }}'); background-size: cover; background-position: center;"
+        {% else %}
+          style="background-color: {{ swatch_bg }};"
+        {% endif %}
       ></span>
     {%- endfor -%}
   </div>
+
+  <style>
+    .hos-swatches {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .hos-swatch {
+      display: inline-block;
+      width: 1.8rem;
+      height: 1.8rem;
+      border: 1px solid var(--ash);
+      cursor: pointer;
+      position: relative;
+      transition: box-shadow 0.15s;
+    }
+
+    .hos-swatch--selected {
+      box-shadow: 0 0 0 2px var(--void), 0 0 0 3px var(--crimson);
+    }
+
+    .hos-swatch--soldout::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom right,
+        transparent calc(50% - 0.5px),
+        var(--ash) calc(50% - 0.5px),
+        var(--ash) calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      );
+    }
+  </style>
 {%- endif -%}
