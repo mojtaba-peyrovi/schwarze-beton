@@ -1,0 +1,249 @@
+{%- comment -%}
+  Widerrufsfunktion / electronic withdrawal function — § 356a BGB (in force 19.06.2026).
+  Two-step, no-login flow. Posts to the HOS tools backend which validates the order,
+  records the withdrawal (order tag + note) and emails an immediate receipt confirmation.
+  Styled to the Schwarze Beton design system (zero border-radius, --parchment text,
+  --schrei CTA, Barlow body / Cinzel display).
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }}">
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <div class="hos-widerruf" data-endpoint="{{ section.settings.backend_url | default: 'https://tools.houseofsteam.store' }}">
+      <h1 class="hos-widerruf__title">{{ section.settings.heading | default: 'Vertrag widerrufen' }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <div class="hos-widerruf__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+
+      {%- comment -%} Step 1 — identify the contract {%- endcomment -%}
+      <form class="hos-widerruf__step" data-step="1" novalidate>
+        <p class="hos-widerruf__lead">
+          Bitte geben Sie Ihre Bestellnummer und die bei der Bestellung verwendete E-Mail-Adresse an.<br>
+          <span class="hos-widerruf__sub">Please enter your order number and the email address used for the order.</span>
+        </p>
+
+        <label class="hos-widerruf__label" for="hos-w-order">Bestellnummer / Order number *</label>
+        <input class="hos-widerruf__input" id="hos-w-order" name="order_number" type="text" inputmode="numeric"
+               autocomplete="off" placeholder="z. B. 1234" required>
+
+        <label class="hos-widerruf__label" for="hos-w-email">E-Mail-Adresse / Email *</label>
+        <input class="hos-widerruf__input" id="hos-w-email" name="email" type="email"
+               autocomplete="email" placeholder="name@example.com" required>
+
+        <p class="hos-widerruf__error" data-error hidden></p>
+
+        <button class="hos-widerruf__btn hos-widerruf__btn--cta" type="submit" data-submit aria-label="Weiter zur Bestätigung des Widerrufs">
+          Weiter / Continue
+        </button>
+        <p class="hos-widerruf__hint">Es wird kein Grund für den Widerruf benötigt. · No reason for withdrawal is required.</p>
+      </form>
+
+      {%- comment -%} Step 2 — explicit confirmation (the legal trigger) {%- endcomment -%}
+      <form class="hos-widerruf__step" data-step="2" hidden novalidate>
+        <p class="hos-widerruf__lead" data-summary></p>
+        <p class="hos-widerruf__sub">
+          Mit Klick auf „Widerruf bestätigen“ erklären Sie den Widerruf dieses Vertrags. Sie erhalten unverzüglich
+          eine Eingangsbestätigung per E-Mail.<br>
+          Clicking “Widerruf bestätigen” submits your withdrawal. You will receive an immediate confirmation by email.
+        </p>
+
+        <p class="hos-widerruf__error" data-error hidden></p>
+
+        <div class="hos-widerruf__actions">
+          <button class="hos-widerruf__btn hos-widerruf__btn--ghost" type="button" data-back>Zurück / Back</button>
+          <button class="hos-widerruf__btn hos-widerruf__btn--cta" type="submit" data-submit aria-label="Widerruf jetzt verbindlich bestätigen">
+            Widerruf bestätigen
+          </button>
+        </div>
+      </form>
+
+      {%- comment -%} Step 3 — success {%- endcomment -%}
+      <div class="hos-widerruf__step" data-step="3" hidden>
+        <h2 class="hos-widerruf__title">Widerruf eingegangen / Withdrawal received</h2>
+        <p class="hos-widerruf__lead" data-success></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hos-widerruf { max-width: 540px; margin: 0 auto; color: var(--parchment, #e4ddd3); font-family: var(--font-body, sans-serif); }
+  .hos-widerruf__title { font-family: var(--font-cinzel, serif); font-size: 1.9rem; letter-spacing: .02em; margin: 0 0 1rem; color: var(--parchment, #e4ddd3); }
+  .hos-widerruf__intro { margin: 0 0 1.75rem; color: var(--bone, #bdb5a8); }
+  .hos-widerruf__lead { margin: 0 0 1.25rem; line-height: 1.55; }
+  .hos-widerruf__sub { color: var(--bone, #bdb5a8); font-size: .9em; }
+  .hos-widerruf__label { display: block; font-weight: 700; margin: 1.1rem 0 .4rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--bone, #bdb5a8); }
+  .hos-widerruf__input {
+    width: 100%; padding: .8rem .9rem; font-size: 1rem; border-radius: 0;
+    border: 1px solid var(--ash, #262626); background: var(--bunker, #0f0f0f);
+    color: var(--parchment, #e4ddd3); font-family: var(--font-body, sans-serif);
+  }
+  .hos-widerruf__input::placeholder { color: var(--iron, #666); }
+  .hos-widerruf__input:focus { outline: 2px solid var(--schrei, #b8301f); outline-offset: 1px; border-color: var(--schrei, #b8301f); }
+  .hos-widerruf__hint { font-size: .8rem; color: var(--iron, #666); margin: .8rem 0 0; }
+  .hos-widerruf__error { color: var(--schrei, #b8301f); font-weight: 700; margin: 1rem 0 0; }
+  .hos-widerruf__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .hos-widerruf__btn {
+    display: inline-block; font-family: var(--font-display, sans-serif); font-size: 1rem; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; border-radius: 0;
+    padding: .85rem 1.8rem; border: 0; cursor: pointer; line-height: 1.2;
+  }
+  .hos-widerruf__btn--cta { background: var(--schrei, #b8301f); color: var(--parchment, #e4ddd3); margin-top: 1.5rem; }
+  .hos-widerruf__btn--cta:hover { background: var(--blood, #6e1510); }
+  .hos-widerruf__btn--cta[disabled] { opacity: .55; cursor: default; }
+  .hos-widerruf__btn--ghost { background: transparent; color: var(--parchment, #e4ddd3); border: 1px solid var(--ash, #262626); margin-top: 1.5rem; }
+  .hos-widerruf__btn--ghost:hover { border-color: var(--parchment, #e4ddd3); }
+  .hos-widerruf__step[hidden] { display: none; }
+</style>
+
+<script>
+  (function () {
+    var scripts = document.querySelectorAll('.hos-widerruf');
+    scripts.forEach(function (widget) {
+      if (widget.dataset.bound) return;
+      widget.dataset.bound = '1';
+
+      var endpoint = widget.dataset.endpoint.replace(/\/+$/, '');
+      var step1 = widget.querySelector('[data-step="1"]');
+      var step2 = widget.querySelector('[data-step="2"]');
+      var step3 = widget.querySelector('[data-step="3"]');
+      var current = { order_number: '', email: '' };
+
+      function show(el) {
+        [step1, step2, step3].forEach(function (s) { s.hidden = (s !== el); });
+        widget.querySelectorAll('[data-error]').forEach(function (e) { e.hidden = true; });
+      }
+      function showError(form, msg) {
+        var box = form.querySelector('[data-error]');
+        box.textContent = msg; box.hidden = false;
+      }
+      function busy(form, on) { form.querySelector('[data-submit]').disabled = on; }
+
+      var ERRORS = {
+        missing_fields: 'Bitte Bestellnummer und gültige E-Mail-Adresse angeben. / Please provide an order number and a valid email.',
+        no_match: 'Wir konnten keine Bestellung mit dieser Nummer und E-Mail-Adresse finden. Bitte prüfen Sie Ihre Eingabe. / No order found for that number and email — please check your details.',
+        server_error: 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut. / Something went wrong — please try again later.',
+        network: 'Verbindung fehlgeschlagen. Bitte versuchen Sie es erneut. / Connection failed — please try again.'
+      };
+
+      step1.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var order_number = step1.querySelector('[name="order_number"]').value.trim();
+        var email = step1.querySelector('[name="email"]').value.trim();
+        if (!order_number || !email) { showError(step1, ERRORS.missing_fields); return; }
+
+        busy(step1, true);
+        fetch(endpoint + '/widerruf/lookup', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order_number: order_number, email: email })
+        }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+          .then(function (res) {
+            busy(step1, false);
+            if (!res.ok || !res.d.ok) { showError(step1, ERRORS[res.d.error] || ERRORS.server_error); return; }
+            current = { order_number: order_number, email: email };
+            var o = res.d.order;
+            step2.querySelector('[data-summary]').innerHTML =
+              'Sie sind dabei, den Vertrag aus Bestellung <strong>' + o.name +
+              '</strong> (aufgegeben am ' + o.created_at_display + ') zu widerrufen.<br>' +
+              '<span class="hos-widerruf__sub">You are about to withdraw from order <strong>' + o.name +
+              '</strong>, placed on ' + o.created_at_display + '.</span>';
+            show(step2);
+          })
+          .catch(function () { busy(step1, false); showError(step1, ERRORS.network); });
+      });
+
+      step2.querySelector('[data-back]').addEventListener('click', function () { show(step1); });
+
+      step2.addEventListener('submit', function (e) {
+        e.preventDefault();
+        busy(step2, true);
+        fetch(endpoint + '/widerruf/confirm', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(current)
+        }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+          .then(function (res) {
+            busy(step2, false);
+            if (!res.ok || !res.d.ok) { showError(step2, ERRORS[res.d.error] || ERRORS.server_error); return; }
+            step3.querySelector('[data-success]').innerHTML =
+              'Wir haben Ihren Widerruf für Bestellung <strong>' + res.d.order_name + '</strong> am ' +
+              res.d.received_at_display + ' erhalten. Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet. ' +
+              'Wir melden uns bezüglich der nächsten Schritte.<br><br>' +
+              '<span class="hos-widerruf__sub">We have received your withdrawal for order <strong>' + res.d.order_name +
+              '</strong> on ' + res.d.received_at_display + '. A confirmation has been sent to your email. ' +
+              'We will contact you regarding the next steps.</span>';
+            show(step3);
+          })
+          .catch(function () { busy(step2, false); showError(step2, ERRORS.network); });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Widerrufsfunktion",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Vertrag widerrufen"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "<p>Hier können Sie einen Vertrag mit House of Steam widerrufen. / Here you can withdraw from a contract with House of Steam.</p>"
+    },
+    {
+      "type": "url",
+      "id": "backend_url",
+      "label": "Backend URL",
+      "info": "HOS tools backend that processes the withdrawal. Default: https://tools.houseofsteam.store"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Padding bottom",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Widerrufsfunktion"
+    }
+  ]
+}
+{% endschema %}

@@ -228,7 +228,10 @@
   <!-- ── Orders + address details ── -->
   <div class="account__body">
     <div class="account__orders">
-      <h2>{{ 'customer.orders.title' | t }}</h2>
+      <div class="account__orders-header">
+        <h2>{{ 'customer.orders.title' | t }}</h2>
+        <a href="https://houseofsteam.store/apps/parcelpanel">{{ 'general.track_order' | t }}</a>
+      </div>
 
       {% paginate customer.orders by 20 %}
         {%- if customer.orders.size > 0 -%}

@@ -37,6 +37,14 @@
   min-width: 0;
 }
 
+.account__orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm, 12px);
+  flex-wrap: wrap;
+}
+
 .account__details {
   flex: 0 0 260px;
 }

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "widerruf": {
+      "type": "widerruf-form",
+      "settings": {
+        "heading": "Vertrag widerrufen",
+        "intro": "<p>Über dieses Formular können Sie einen mit House of Steam geschlossenen Vertrag widerrufen. Es ist keine Anmeldung erforderlich. / Use this form to withdraw from a contract concluded with House of Steam. No login required.</p>",
+        "backend_url": "https://tools.houseofsteam.store",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "widerruf"
+  ]
+}

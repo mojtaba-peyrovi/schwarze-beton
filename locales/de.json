@@ -1,5 +1,6 @@
 {
   "general": {
+    "track_order": "Sendung verfolgen",
     "password_page": {
       "login_form_heading": "Shop mit Passwort betreten:",
       "login_password_button": "Mit Passwort betreten",

@@ -1,0 +1,144 @@
+{{ 'dark-pages.css' | asset_url | stylesheet_tag }}
+
+{%- paginate blog.articles by 12 -%}
+<section class="dp-blog">
+
+  {%- comment -%} ── Masthead ─────────────────────────────────────────── {%- endcomment -%}
+  <div class="dp-masthead">
+    <div class="page-width">
+      <span class="dp-masthead__eyebrow">House of Steam</span>
+      <span class="dp-masthead__title">{{ blog.title | escape }}</span>
+
+      <div class="dp-masthead__divider">
+        <span></span>
+        <span class="dp-masthead__divider-mark"></span>
+        <span></span>
+      </div>
+
+      <span class="dp-masthead__tagline">Editorials &nbsp;·&nbsp; Style Dispatches &nbsp;·&nbsp; Gothic Chronicles</span>
+    </div>
+    <div class="dp-masthead__rule"></div>
+  </div>
+
+  {%- comment -%} ── Articles ─────────────────────────────────────────── {%- endcomment -%}
+  <div class="dp-content page-width">
+
+    {%- if blog.articles_count > 0 -%}
+
+      {%- comment -%} Featured article (first one) {%- endcomment -%}
+      {%- assign featured = blog.articles.first -%}
+      <div class="dp-featured">
+        <a href="{{ featured.url }}" class="dp-featured__link">
+
+          {%- if featured.image -%}
+            <div class="dp-featured__media">
+              <img
+                src="{{ featured.image | image_url: width: 1200 }}"
+                srcset="
+                  {{ featured.image | image_url: width: 400 }} 400w,
+                  {{ featured.image | image_url: width: 800 }} 800w,
+                  {{ featured.image | image_url: width: 1200 }} 1200w,
+                  {{ featured.image | image_url: width: 1600 }} 1600w
+                "
+                sizes="(min-width: 990px) 60vw, 100vw"
+                alt="{{ featured.image.alt | default: featured.title | escape }}"
+                loading="eager"
+                fetchpriority="high"
+                width="{{ featured.image.width }}"
+                height="{{ featured.image.height }}"
+              >
+            </div>
+          {%- else -%}
+            <div class="dp-featured__media dp-featured__media--empty"></div>
+          {%- endif -%}
+
+          <div class="dp-featured__info">
+            <span class="dp-pill">Featured</span>
+            <time class="dp-date" datetime="{{ featured.published_at | date: '%Y-%m-%d' }}">
+              {{- featured.published_at | date: '%B %d, %Y' -}}
+            </time>
+            <h2 class="dp-featured__title">{{ featured.title | escape }}</h2>
+            {%- assign excerpt = featured.excerpt | default: featured.content | strip_html | strip | truncate: 200 -%}
+            {%- if excerpt != blank -%}
+              <p class="dp-featured__excerpt">{{ excerpt }}</p>
+            {%- endif -%}
+            <span class="dp-cta">
+              Read Story
+              <span class="dp-cta__arrow" aria-hidden="true">→</span>
+            </span>
+          </div>
+
+        </a>
+      </div>
+
+      {%- comment -%} Article grid (remaining articles) {%- endcomment -%}
+      {%- if blog.articles_count > 1 -%}
+        <div class="dp-grid__header">
+          <span class="dp-grid__label">More Stories</span>
+          <span class="dp-grid__line"></span>
+        </div>
+
+        <div class="dp-grid">
+          {%- for article in blog.articles offset: 1 -%}
+            <article class="dp-card">
+              <a href="{{ article.url }}" class="dp-card__link">
+
+                {%- if article.image -%}
+                  <div class="dp-card__media">
+                    <img
+                      src="{{ article.image | image_url: width: 600 }}"
+                      srcset="
+                        {{ article.image | image_url: width: 300 }} 300w,
+                        {{ article.image | image_url: width: 600 }} 600w,
+                        {{ article.image | image_url: width: 900 }} 900w
+                      "
+                      sizes="(min-width: 990px) 33vw, (min-width: 600px) 50vw, 100vw"
+                      alt="{{ article.image.alt | default: article.title | escape }}"
+                      loading="lazy"
+                      width="{{ article.image.width }}"
+                      height="{{ article.image.height }}"
+                    >
+                  </div>
+                {%- else -%}
+                  <div class="dp-card__media dp-card__media--empty"></div>
+                {%- endif -%}
+
+                <div class="dp-card__body">
+                  <time class="dp-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                    {{- article.published_at | date: '%b %d, %Y' -}}
+                  </time>
+                  <h3 class="dp-card__title">{{ article.title | escape }}</h3>
+                  {%- assign card_excerpt = article.excerpt | default: article.content | strip_html | strip | truncate: 110 -%}
+                  {%- if card_excerpt != blank -%}
+                    <p class="dp-card__excerpt">{{ card_excerpt }}</p>
+                  {%- endif -%}
+                </div>
+
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Pagination {%- endcomment -%}
+      {%- if paginate.pages > 1 -%}
+        <div class="dp-pagination">
+          {%- render 'pagination', paginate: paginate -%}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <p class="dp-empty">The darkness is gathering. Stories forthcoming.</p>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Dark Pages Blog",
+  "tag": "section",
+  "class": "section"
+}
+{% endschema %}

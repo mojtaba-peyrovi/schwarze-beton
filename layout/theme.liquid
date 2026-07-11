@@ -7,6 +7,9 @@
     <meta name="theme-color" content="#080808">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    {%- comment -%}Strip UTM/tracking params from the visible URL so Google never indexes a UTM variant of this page.{%- endcomment -%}
+    <script>(function(){var u=new URL(location.href),d=false;['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','gclid','fbclid'].forEach(function(p){if(u.searchParams.has(p)){u.searchParams.delete(p);d=true;}});if(d)history.replaceState(null,'',u.pathname+(u.search||'')+(u.hash||''));})();</script>
+
     {%- for language in localization.available_languages -%}
       <link rel="alternate" hreflang="{{ language.iso_code }}" href="{{ request.origin }}{{ request.path }}">
     {%- endfor -%}

@@ -1,0 +1,102 @@
+{{ 'dark-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign words_per_minute = 200
+  assign word_count = article.content | strip_html | split: ' ' | size
+  assign read_minutes = word_count | divided_by: words_per_minute | at_least: 1
+-%}
+
+<article class="dp-article" itemscope itemtype="https://schema.org/Article">
+
+  {%- comment -%} ── Hero image ────────────────────────────────────────── {%- endcomment -%}
+  {%- if article.image -%}
+    <div class="dp-article__hero">
+      <img
+        src="{{ article.image | image_url: width: 1600 }}"
+        srcset="
+          {{ article.image | image_url: width: 750 }} 750w,
+          {{ article.image | image_url: width: 1100 }} 1100w,
+          {{ article.image | image_url: width: 1600 }} 1600w,
+          {{ article.image | image_url: width: 2200 }} 2200w
+        "
+        sizes="100vw"
+        alt="{{ article.image.alt | default: article.title | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="{{ article.image.width }}"
+        height="{{ article.image.height }}"
+        itemprop="image"
+      >
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Article header ────────────────────────────────────── {%- endcomment -%}
+  <header class="dp-article__header page-width">
+    <div class="dp-article__header-inner">
+
+      <nav class="dp-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ blog.url }}" class="dp-breadcrumb__back">
+          <span class="dp-breadcrumb__back-arrow" aria-hidden="true">←</span>
+          {{ blog.title | escape }}
+        </a>
+      </nav>
+
+      <div class="dp-article__meta">
+        <time
+          datetime="{{ article.published_at | date: '%Y-%m-%d' }}"
+          itemprop="datePublished"
+        >
+          {{- article.published_at | date: '%B %d, %Y' -}}
+        </time>
+        {%- if word_count > 0 -%}
+          <span class="dp-article__meta-sep" aria-hidden="true"></span>
+          <span class="dp-article__read-time">{{ read_minutes }} min read</span>
+        {%- endif -%}
+      </div>
+
+      <h1 class="dp-article__title" itemprop="headline">{{ article.title | escape }}</h1>
+
+    </div>
+  </header>
+
+  {%- comment -%} ── Article content ───────────────────────────────────── {%- endcomment -%}
+  <div
+    class="dp-article__content page-width rte"
+    itemprop="articleBody"
+  >
+    {{ article.content }}
+  </div>
+
+  {%- comment -%} ── Tags ──────────────────────────────────────────────── {%- endcomment -%}
+  {%- if article.tags.size > 0 -%}
+    <footer class="dp-article__footer page-width">
+      <div class="dp-tags">
+        <span class="dp-tags__label">Tagged</span>
+        {%- for tag in article.tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="dp-tag">{{ tag | escape }}</a>
+        {%- endfor -%}
+      </div>
+    </footer>
+  {%- endif -%}
+
+  {%- comment -%} ── Back to blog ──────────────────────────────────────── {%- endcomment -%}
+  <div class="dp-article__back page-width">
+    <a href="{{ blog.url }}" class="dp-back-link">
+      <span class="dp-back-link__arrow" aria-hidden="true">←</span>
+      Back to {{ blog.title | escape }}
+    </a>
+  </div>
+
+</article>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "The Dark Pages — Article",
+  "tag": "section",
+  "class": "section"
+}
+{% endschema %}
