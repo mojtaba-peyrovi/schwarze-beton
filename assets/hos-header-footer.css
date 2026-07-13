@@ -44,7 +44,7 @@
 }
 
 .header__heading-logo {
-  height: 60px;
+  height: 90px;
   width: auto;
 }
 
@@ -272,6 +272,62 @@ follow-on-shop,
   align-items: center !important;
   gap: 8px !important;
   flex-wrap: nowrap !important;
+}
+
+/* Force the country and language trigger buttons to share identical
+   box dimensions — the theme's default `.localization-form__select`
+   rule (height: 3.8rem, padding: 0 2.7rem 0 1.2rem) only wins the
+   cascade for one of the two buttons depending on markup nesting,
+   which left them visibly different heights/widths. */
+.header-localization .disclosure__button,
+.header-localization .localization-form__select {
+  height: 2.6rem !important;
+  padding: 0 0.7rem !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+  width: max-content !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+  flex-grow: 0 !important;
+}
+
+/* `.localization-form:only-child` (theme default) adds extra margin to
+   whichever selector's wrapper happens to have no sibling — the country
+   selector's <span> qualifies, the language selector's doesn't — so they
+   drift out of vertical alignment with each other. Kill it at the source. */
+.header-localization .localization-form:only-child .localization-form__select {
+  margin: 0 !important;
+}
+
+/* The country selector's wrapper chain (span > localization-form >
+   form.hos-country-form) has no shared class with the theme's
+   `.localization-form` reset above, so it can carry its own default
+   padding/margin and inline layout quirks that nudge its button out of
+   vertical sync with the language button. Flatten the whole chain. */
+@media screen and (min-width: 990px) {
+  .desktop-localization-wrapper > span,
+  .desktop-localization-wrapper > localization-form {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+.header-localization .hos-country-form,
+.header-localization .hos-country-selector {
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ── Selector caret icons — keep them in normal flow with a gap so
+   they never overlap the label text ── */
+.header-localization .disclosure__button .icon-caret {
+  position: static !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.5rem !important;
+  height: 0.5rem !important;
+  width: 0.6rem !important;
 }
 
 /* ── Localization selectors (header + footer) ── */
